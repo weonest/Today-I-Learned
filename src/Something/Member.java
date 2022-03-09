@@ -1,16 +1,17 @@
+package Something;
+
 public class Member {
 
     private int memberID;
     private String memberName;
 
-    public Member() {
-    }
 
+           // 생성자
     public Member(int memberID, String memberName) {
         this.memberID = memberID;
         this.memberName = memberName;
     }
-
+// getter , setter
     public int getMemberID() {
         return memberID;
     }
@@ -27,6 +28,7 @@ public class Member {
         this.memberName = memberName;
     }
 
+//           클래스를 출력하는 오버라이딩
     public String toString() { // String toString 여기 뭐지?
         return memberName + "회원님의 아이디는 " + memberID + "입니다.";
     }

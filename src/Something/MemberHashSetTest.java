@@ -1,3 +1,5 @@
+package Something;
+
 public class MemberHashSetTest {
     public static void main(String[] args) {
 

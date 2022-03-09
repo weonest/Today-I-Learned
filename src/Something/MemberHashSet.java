@@ -1,13 +1,16 @@
+package Something;
+
 import java.util.HashSet;
 import java.util.Iterator;
 
 public class MemberHashSet {
 
-    private HashSet<Member> hashSet;
+    private HashSet<Member> hashSet; // 주입 방식 결정 / 싱글톤
 
+
+            // 생성자
     public MemberHashSet() {
         hashSet = new HashSet<>();
-
     }
 
     // 멤버 한명 추가
@@ -20,7 +23,7 @@ public class MemberHashSet {
 
         Iterator iter = hashSet.iterator();
         if (iter.hasNext()) {
-            Member member = (Member) iter.next();
+            Member member = (Member) iter.next(); // 속성을 맞춰줬다
             if (member.getMemberID() == memberID) {
                 hashSet.remove(member);
                 return true;
