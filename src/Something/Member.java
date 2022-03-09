@@ -33,6 +33,7 @@ public class Member {
         return memberName + "회원님의 아이디는 " + memberID + "입니다.";
     }
 
+    // Set 에서 중복을 방지하려면  MemberID 값이 같으면 true로 리턴 , hashCode도 정의해줘야한다.
     @Override
     public boolean equals(Object obj) {
         Member member = (Member) obj; // 다운캐스팅

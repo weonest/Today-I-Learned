@@ -5,11 +5,14 @@ public class MemberHashSetTest {
 
         MemberHashSet manager = new MemberHashSet();
 
+
         Member memberWeon = new Member(100, "원건희");
         Member memberBaek = new Member(200, "백승한");
         Member memberHong = new Member(300, "홍미림");
         Member memberHong2 = new Member(300, "홍미림2");
         Member memberBan = new Member(400, "반달");
+
+        memberWeon.setMemberID(1234);
 
         manager.addMember((memberWeon));
         manager.addMember((memberBaek));
