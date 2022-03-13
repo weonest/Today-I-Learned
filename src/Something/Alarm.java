@@ -15,7 +15,7 @@ public class Alarm {
         al.setTime(t);
         al.setMinute(m);
 
-        System.out.println("알람 설정 시각은 " + al.getTime () + " : " + al.getMinute() + "입니다.");
+        System.out.println("알람 설정 시각은 " + al.getTime () + ":" + al.getMinute() + " 입니다.");
 
         if(!al.isRing()){
             al.setRing(true);
