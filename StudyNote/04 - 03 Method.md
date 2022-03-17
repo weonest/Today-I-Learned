@@ -279,8 +279,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int a = 1;
-        Main m = new Maiun()
+        int a = 1;    // 이곳의 int a는 Main 클래스의 객체 변수 a와는 별개인 것이다
+        Main m = new Main();
         m.varTest(a);
         System.out.println(a);
     }
