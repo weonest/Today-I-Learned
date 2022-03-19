@@ -55,11 +55,14 @@ class Calculator2 {
 
 public class Sample {
     public static void main(String[] args) {
-        System.out.println(Calculator1.add(3));
-        System.out.println(Calculator1.add(4));
+				Calculator cal1 = new Calculator();
+				Calculator cal2 = new Calculator();
 
-        System.out.println(Calculator2.add(3));
-        System.out.println(Calculator2.add(7));
+        System.out.println(cal1.add(3));
+        System.out.println(cal1.add(4));
+
+        System.out.println(cal2.add(3));
+        System.out.println(cal2.add(7));
     }
 }
 ```
@@ -67,3 +70,19 @@ public class Sample {
 Calculator 클래스로 만든 별개의 계산기`cal1`, `cal2`(이것을 객체라고 부른다)가 각각의 역할을 수행한다. 그리고 계산기(cal1, cal2)의 결과값 역시 다른 계산기의 결과값과 상관없이 독립적인 값을 유지한다. 객체를 사용하면 계산기 대수가 늘어나더라도 객체를 생성만 하면 되기 때문에 클래스만을 사용하는 경우와 달리 매우 간단해진다.
 
 만약 빼기 기능을 추가하려면 Calculator 클래스에 다음처럼 sub 메소드를 추가하면 된다.
+
+```java
+class Calculator {
+    int result = 0;
+
+    int add(int num) {
+        result += num;
+        return result;
+    }
+
+    int sub(int num) {
+        result -= num;
+        return result;
+    }
+}
+```
