@@ -1,71 +1,32 @@
-interface Predator {
-    String getFood();
-
-    default void printFood() {
-        System.out.printf("my food is %s\n", getFood());
-    }
-    int legCount = 4;
-
-    static int speed() {
-        return legCount * 30;
-    }
-}
-
-interface Barkable {
-    void bark();
-}
-
-interface BarkablePredator extends Predator,Barkable{
-
-}
-
-class Animal {
-    String name;
-    void setName(String name) {
-        this.name = name;
-    }
-}
-
-class Tiger extends Animal implements BarkablePredator {
-    public String getFood() {
-        return "apple";
-    }
-    public void bark(){
-        System.out.println("어흥");
-    }
-}
-
-class Lion extends Animal implements BarkablePredator {
-    public String getFood() {
-        return "banana";
-    }
-    public void bark(){
-        System.out.println("으르렁");
-    }
-}
-
-class ZooKeeper {
-    void feed (Predator predator) { // 호랑이가 오면 사과를 던져 준다.
-        System.out.println("feed : " + predator.getFood() );
-    }
-}
-
-class Bouncer {
-    void barkAnimal(Barkable animal) {
-        animal.bark();
-    }
-}
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
-        ZooKeeper zk = new ZooKeeper();
-        Tiger tiger = new Tiger();
-        Lion lion = new Lion();
-        Bouncer bouncer = new Bouncer();
+    public static void main(String[] args) throws IOException {
+        // sample.txt 파일을 읽어서 변수에 저장한다.
+        ArrayList<String> data = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader("sample.txt"));
+        while(true) {
+            String line = br.readLine();
+            if (line==null) break;
+            data.add(line);
+        }
+        br.close();
 
-        bouncer.barkAnimal(tiger);
-        zk.feed(tiger);
-        zk.feed(lion);
-        tiger.bark();
+        System.out.println(data);
+        // 줄 단위로 읽으면 줄바꿈 문자가 없어지므로 줄바꿈 문자를 포함한다.
+        String text = String.join("\n", data);
+        System.out.println(text);
+
+        // python 이라는 단어를 java로 변경한다.
+        text = text.replaceAll("python", "java");
+
+        // 변경된 내용을 다시 파일에 적는다.
+        FileWriter fw = new FileWriter("sample.txt");
+        fw.write(text);
+        fw.close();
     }
 }
