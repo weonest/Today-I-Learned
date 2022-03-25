@@ -151,7 +151,7 @@ public class Sample {
         BufferedReader br = new BufferedReader(new FileReader("sample.txt"));
         while(true) {
             String line = br.readLine();
-            if (line==null) break;
+            if (line == null) break;
             data.add(line);
         }
         br.close();
