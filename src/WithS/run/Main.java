@@ -1,0 +1,1 @@
+package run;import string.TXTReader;public class Main {    public static void main(String[] args) {        TXTReader reader = new TXTReader("src/resource/", "sample.txt");        reader.doModify(reader.getFile());    }}
