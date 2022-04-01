@@ -1,4 +1,4 @@
-# **07-04 Exception**
+# **06 - 02 Exception**
 
 ------
 
