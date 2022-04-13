@@ -92,3 +92,20 @@ public class Main {
 다음 예는 15와 같은 수를 이중으로 더하여 잘못된 결과를 출력하는 잘못된 풀이이다.
 
 **[잘못된 풀이]**
+
+```java
+public class Problem1 {
+    public static void main(String[] args) {
+        int result = 0;
+        for (int n = 1; n < 1000; n++) {
+            if (n % 3 == 0) {
+                result += n;
+            }
+            if (n % 5 == 0) {
+                result += n;
+            }
+        }
+        System.out.println(result);
+    }
+}
+```
