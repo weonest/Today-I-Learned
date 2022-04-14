@@ -258,3 +258,5 @@ public class Main {
 스트림 방식은 일반적인 코드보다 확실히 간결하고 가독성이 좋다는 것을 확인할 수 있을 것이다.
 
 > Arrays.stream 처럼 스트림을 생성하고 boxed, filter, distinct, sorted, mapToInt 처럼 스트림을 가공하고 toArray 처럼 스트림을 원하는 형태로 반환하는 방법에는 여러가지가 있다. 이 책에서는 스트림을 이해하기 위한 목적으로 몇 가지에 대해서만 알아보았다.
+
+심화 학습 필요!
