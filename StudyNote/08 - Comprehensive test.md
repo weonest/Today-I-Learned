@@ -1,3 +1,5 @@
+# 08 **Comprehensive test**
+
 ------
 
 자바는 웹, 모바일, GUI, 네트워크, 딥러닝 등 상당히 많은 일을 할 수 있는 언어이다. 여러분이 지금까지 배운 내용을 충분히 숙지했다면 이제 이들을 향해 첫발을 내디딜 준비를 마친 것이다. 하지만 그전에 여기에 준비한 문제들을 풀어 보면서 여러분이 얼마나 자바에 익숙해졌는지 점검해 보도록 하자.
@@ -18,11 +20,6 @@ a:b:c:d
 
 ```java
 a#b#c#d
-```
-
-
-
-```java
 package JumpToJava;
 
 public class Main {
@@ -84,7 +81,7 @@ public class Main {
 
 다음은 A학급 학생의 점수를 나타내는 정수 배열이다. 다음 배열에서 50점 이상 점수의 총합을 구하시오.
 
-```
+```java
 int[] A = {20, 55, 67, 82, 45, 33, 90, 87, 100, 25};
 package JumpToJava;
 
@@ -151,7 +148,7 @@ public class Main {
 
 실행 예)
 
-```
+```java
 구구단을 출력할 숫자를 입력하세요(2~9): 2
 2 4 6 8 10 12 14 16 18
 package JumpToJava;
@@ -178,7 +175,7 @@ public class Main {
 
 사용자로부터 다음과 같은 숫자를 입력받아 입력받은 숫자의 총합을 구하는 프로그램을 작성하시오. (단 숫자는 콤마로 구분하여 입력한다.)
 
-```
+```java
 65,45,2,3,45,8
 package JumpToJava;
 
@@ -226,7 +223,7 @@ EEE
 
 이 파일의 내용을 다음과 같이 역순으로 바꾸어 result.txt 파일에 저장하시오.
 
-```
+```java
 EEE
 DDD
 CCC
@@ -272,7 +269,7 @@ public class Main {
 
 다음과 같이 총 10줄로 이루어진 abc.txt 파일이 있다. sample.txt 파일의 숫자 값을 모두 읽어 총합과 평균 값을 구한 후 평균 값을 result.txt 파일에 쓰는 프로그램을 작성하시오.
 
-```
+```java
 70
 60
 55
@@ -415,45 +412,60 @@ public static void main(String[] args) {
 이 프로그램은 10회의 execute 메서드 호출 시 입력 숫자가 홀수인 경우 프로그램이 즉시 종료된다. OddException이 발생하더라도 프로그램이 종료되지 않고 10회 모두 호출될 수 있도록 프로그램을 수정하시오.
 
 ```java
-package JumpToJava;
+# 1번 풀이
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 class OddException extends Exception {
 }
 
-public class Main {
+public class Sample {
     static void execute(int n) throws OddException {
         System.out.printf("입력 숫자: %d\\n", n);
-
         if (n % 2 == 1) {  // 홀수이면 OddException이 발생한다.
             throw new OddException();
-
         }
         System.out.println("짝수입니다.");
     }
 
     public static void main(String[] args) {
         Random r = new Random();
-        ArrayList<Integer> list = new ArrayList<>();
-        try {
-            for (int i = 0; i < 10; i++) {
-                int temp =  list.get(r.nextInt(10));
-                execute(temp);
-                list.remove(temp);
-                System.out.println(list + " test");
+        for (int i = 0; i < 10; i++) {
+            try {  // for문 안쪽에 try .. catch 문을 위치시켰다.
+                execute(r.nextInt(10));
+            } catch (OddException e) {
+                e.printStackTrace();
             }
-        } catch (OddException e) {
-            e.printStackTrace();
-        }
-        finally {
-
         }
     }
 }
+# 2번 풀이
+
+import java.util.Random;
+
+class OddException extends Exception {
+}
+
+public class Sample {
+    static void execute(int n) {  // execute 메서드내에서 OddException을 직접 처리했다.
+        System.out.printf("입력 숫자: %d\\n", n);
+        try {
+            if (n % 2 == 1) {  // 홀수이면 OddException이 발생한다.
+                throw new OddException();
+            }
+            System.out.println("짝수입니다.");
+        } catch (OddException e) {
+            e.printStackTrace();
+            ;
+        }
+    }
+
+    public static void main(String[] args) {
+        Random r = new Random();
+        for (int i = 0; i < 10; i++) {
+            execute(r.nextInt(10));
+        }
+    }
 ```
 
 ## **Q11 DashInsert 함수**
@@ -463,15 +475,98 @@ DashInsert 메서드 숫자로 구성된 문자열을 입력받은 뒤 문자열
 ```
 입력 예시: 4546793
 출력 예시: 454*67-9-3
+package JumpToJava;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class DashInsert2 {
+    public DashInsert2() {
+    }
+
+    public StringBuffer stringToList2(String number) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(number);
+        System.out.println(sb);
+        return sb;
+    }
+    boolean isEven(int num) {
+        return num % 2 == 0 ? true : false;
+    }
+
+    boolean isOdd(int num) {
+        return num % 2 != 0 ? true : false;
+    }
+
+    public void Compare(StringBuffer sb) {
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 1; i < sb.length(); i++) {
+            if (isEven(sb.charAt(i)) && isEven(sb.charAt(i - 1))) {
+                list.add(i);
+            } else if (isOdd(sb.charAt(i)) && isOdd(sb.charAt(i - 1))) {
+                list.add(i);
+            }
+
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if(isEven(list.get(i))) {
+                sb.insert(list.get(i) + 1, "-");
+            } else if( isOdd(list.get(i))) {
+                sb.insert(list.get(i) + 1, "*");
+            }
+        }
+        System.out.println(sb);
+    }
+
+}
+public class Practice {
+    public static void main(String[] args) {
+        DashInsert2 di = new DashInsert2();
+        StringBuffer sb = di.stringToList2("124124");
+        di.Compare(sb);
+    }
+}
+# 답
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Sample {
+    static String dashInsert(String data) {
+        int[] numbers = Arrays.stream(data.split(""))  // 숫자 문자열을 정수 배열로 변경
+                .mapToInt(Integer::parseInt)
+                .toArray();
+        ArrayList<String> resultList = new ArrayList<>();
+        for (int i = 0; i < numbers.length; i++) {
+            resultList.add("" + numbers[i]);
+            if (i < numbers.length - 1) {  // 다음 수가 있다면
+                boolean isOdd = numbers[i] % 2 == 1;  // 현재 수가 홀수인지 여부
+                boolean isNextOdd = numbers[i + 1] % 2 == 1;  // 다음 수가 홀수인지 여부
+                if (isOdd && isNextOdd) {  // 두 수가 연속해서 홀수인 경우
+                    resultList.add("-");
+                } else if (!isOdd && !isNextOdd) {  // 두 수가 연속해서 짝수인 경우
+                    resultList.add("*");
+                }
+            }
+        }
+        return String.join("", resultList);
+    }
+
+    public static void main(String[] args) {
+        String data = "4546793";
+        String result = dashInsert(data);
+        System.out.println(result);  // 454*67-9-3 출력
+    }
 ```
 
 ## **Q12 문자열 압축하기**
 
 문자열을 입력받아 같은 문자가 연속적으로 반복되는 경우에 그 반복 횟수를 표시해 문자열을 압축하여 표시하시오.
 
-```
+```java
 입력 예시: aaabbcccccca
 출력 예시: a3b2c6a1
+
 ```
 
 ## **Q13 Duplicate Numbers**
@@ -481,6 +576,86 @@ DashInsert 메서드 숫자로 구성된 문자열을 입력받은 뒤 문자열
 ```
 입력 예시: 0123456789 01234 01234567890 6789012345 012322456789
 출력 예시: true false false true false
+package JumpToJava;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+class Compare {
+    String pattern = "^[0-9]*$";
+
+    public Compare() {
+    }
+
+    public List<Integer> getNum(String num) {
+        List<String> strList = Arrays.asList(num.split(""));
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i <strList.size(); i++) {
+            if (Pattern.matches(pattern, strList.get(i))) {
+                list.add(Integer.parseInt(strList.get(i)));
+            } else {
+                System.out.println("CAN NOT PARSE ! \\n String 값이 포함되어있습니다.");
+                continue;
+            }
+        }
+        return list;
+    }
+
+    public void checkNum(List<Integer> list) {
+        List<Integer> comList = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        list.sort(Comparator.naturalOrder());
+        if (comList.size() == list.size()) {
+            for (int i = 0; i < comList.size(); i++) {
+                if (comList.get(i) == list.get(i)) {
+                    if(comList.get(i) == 9){
+                        System.out.println("true");
+                    }
+                } else {
+                    System.out.println("false");
+                    break;
+                }
+            }
+        }else {
+            System.out.println("false");
+        }
+    }
+
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Compare cp = new Compare();
+        List<Integer> list = cp.getNum("0132456799");
+        cp.checkNum(list);
+    }
+}
+import java.util.ArrayList;
+
+public class Sample {
+    static boolean chkDupNum(String data) {
+        ArrayList<String> result = new ArrayList<>();
+        for (String c : data.split("")) {
+            if (result.contains(c)) {
+                return false;  // 중복된 숫자가 있으면 false
+            } else {
+                result.add(c);
+            }
+        }
+        return result.size() == 10;  // 0~9 모두 10개의 숫자인지 확인
+    }
+
+    public static void main(String[] args) {
+        System.out.println(chkDupNum("0123456789"));      // true
+        System.out.println(chkDupNum("01234"));           // false
+        System.out.println(chkDupNum("01234567890"));     // false
+        System.out.println(chkDupNum("6789012345"));      // true
+        System.out.println(chkDupNum("012322456789"));    // false
+    }
+}
 ```
 
 ## **Q14 모스 부호 해독**
