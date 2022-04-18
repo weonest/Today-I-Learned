@@ -760,3 +760,40 @@ public class Main {
 어떠한 암호를 만들 문장과 n을 입력했을 때 암호를 만들어 출력하는 프로그램을 작성하시오.
 
 > ※ 알파벳은 A~Z 까지의 대문자만 사용한다.
+
+```java
+package JumpToJava;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+
+    public String caesarCode(String input, int num) {
+
+        String abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        List<String> list = Arrays.asList(abc.split(""));
+
+        ArrayList<String> code = new ArrayList<>();
+
+        for (String word : input.split("")) {
+            int pos = list.indexOf(word);
+            int newPos = (pos + num) % 26;   // 26 + 5 = 31
+
+            code.add(list.get(newPos));
+        }
+        return String.join("", code);
+    }
+
+
+    public static void main(String[] args) {
+        Main ma = new Main();
+        System.out.println(ma.caesarCode("CAT", 5));
+
+    }
+}
+```
+
