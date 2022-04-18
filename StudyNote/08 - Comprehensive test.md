@@ -472,7 +472,7 @@ public class Sample {
 
 DashInsert 메서드 숫자로 구성된 문자열을 입력받은 뒤 문자열 안에서 홀수가 연속되면 두 수 사이에 `-` 를 추가하고, 짝수가 연속되면 `*` 를 추가하는 기능을 갖고 있다. DashInsert 메서드를 완성하시오.
 
-```
+```java
 입력 예시: 4546793
 출력 예시: 454*67-9-3
 package JumpToJava;
@@ -527,6 +527,8 @@ public class Practice {
         di.Compare(sb);
     }
 }
+
+
 # 답
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -573,7 +575,7 @@ public class Sample {
 
 0~9의 문자로 된 숫자를 입력받았을 때, 이 입력값이 0~9의 모든 숫자를 각각 한 번씩만 사용한 것인지 확인하는 프로그램을 작성하시오.
 
-```
+```java
 입력 예시: 0123456789 01234 01234567890 6789012345 012322456789
 출력 예시: true false false true false
 package JumpToJava;
@@ -686,6 +688,70 @@ public class Sample {
 | K    | -.-  | X      | -..-   |
 | L    | .-.. | Y      | -.--   |
 | M    | --   | Z      | --..   |
+
+```java
+package JumpToJava;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Main {
+    public static HashMap<String, String> getMorseMap() {
+        HashMap<String, String> info = new HashMap<>();
+        info.put(".-", "A");
+        info.put("-...", "B");
+        info.put("-.-.", "C");
+        info.put("-..", "D");
+        info.put(".", "E");
+        info.put("..-.", "F");
+        info.put("--.", "G");
+        info.put("....", "H");
+        info.put("..", "I");
+        info.put(".---", "J");
+        info.put("-.-", "K");
+        info.put(".-..", "L");
+        info.put("--", "M");
+        info.put("-.", "N");
+        info.put("---", "O");
+        info.put(".--.", "P");
+        info.put("--.-", "Q");
+        info.put(".-.", "R");
+        info.put("...", "S");
+        info.put("-", "T");
+        info.put("..-", "U");
+        info.put("...-", "V");
+        info.put(".--", "W");
+        info.put("-..-", "X");
+        info.put("-.--", "Y");
+        info.put("--..", "Z");
+
+        return info;
+    }
+
+    public static String morse(String input) {
+        HashMap<String, String> info = getMorseMap();
+
+        ArrayList<String> result = new ArrayList<>();
+        for (String word : input.split("  ")) {  // 스페이스 2개로 구분
+            for (String c : word.split(" ")) {  // 스페이스 1개로 구분
+                result.add(info.get(c));
+            }
+            result.add(" ");
+        }
+        return String.join("", result);
+    }
+
+    public static void main(String[] args) {
+        String inputData = ".... .  ... .-.. . . .--. ...  . .- .-. .-.. -.--";
+
+        System.out.println(morse(inputData));  // HE SLEEPS EARLY
+    }
+}
+```
+
+
+
+
 
 ## **Q15 시저 암호 풀기**
 
