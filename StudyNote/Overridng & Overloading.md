@@ -175,3 +175,40 @@ Object 클래스에는 모든 인스턴스들이 가져야 할 기본적인 11�
      ```
 
      위 코드와 같은 경우, Child 클래스는 예외의 최고 조상 클래스인 `Exception`을 던지기 때문에 조건을 충족하지 않는다.
+
+
+
+<h2> Overloading
+</h2>
+
+오버로딩과 오버라이딩은 그 단어의 유사함으로 인해 혼동하기 쉽다. 하지만 그 개념은 확실히 다르며, 그 차이점을 아는 것이 중요합니다.
+
+간단히 정희하면 오버로딩은 새로운 메소드를 정의하는 것입니다. 하지만 오버라이딩은 상속받은 기존의 메소드를 재정의하는 것입니다.
+
+다음 예제는 부모 클래스인 Parent 클래스의 `display()` 메소드를 자식 클래스인 Child 클래스에서 오버라이딩과 오버로딩을 둘 다 수행하는 예제입니다.
+
+```java
+class Parent {
+    void display() {System.out.println("부모 클래스의 display() 메소드입니다.")}
+}
+class Child extends Parent {
+    // 오버라이딩된 display() 메소드
+    void display() {System.out.println("자식 클래스의 display() 메소드입니다.")}
+    void display(String str) {System.out.println(str);} //오버로딩된 display() 메소드
+}
+
+public class Main {
+    public static void main(String[] args){
+        Child ch = new Child();
+        ch.display();
+        ch.display("오버로딩된 display() 메소드입니다");
+    }
+}
+// 자식 클래스의 display() 메소드입니다.
+// 오버로딩된 display() 메소드입니다.
+```
+
+
+
+
+
