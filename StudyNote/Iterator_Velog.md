@@ -103,7 +103,7 @@ Iterator 메소드에는
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class IterPrac {
+public class Iter {
     public static void main(String[] args){
         
         System.out.println("List 생성");
