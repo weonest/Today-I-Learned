@@ -2,6 +2,8 @@
 
 > # 05 - 01 Console
 >
+> 
+>
 > ------
 >
 > **콘솔이란**
@@ -19,14 +21,14 @@
 > import java.io.InputStream;
 > 
 > public class Main {
->     public static void main(String[] args) throws IOException {
->         InputStream in = System.in;
+>  public static void main(String[] args) throws IOException {
+>      InputStream in = System.in;
 > 
->         int a;
->         a = in.read();
+>      int a;
+>      a = in.read();
 > 
->         System.out.println(a);
->     }
+>      System.out.println(a);
+>  }
 > }
 > ```
 >
