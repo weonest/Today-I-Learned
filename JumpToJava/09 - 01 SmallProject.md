@@ -8,8 +8,6 @@
 
 > 아래 작성할 프로그램은 실제 한국의 모 은행에서 필자가 작성한 프로그램의 일부분이기도 하다. (간략하된 버전)
 
-
-
 ## 전문 수송신
 
 ------
@@ -362,3 +360,111 @@ item.setValue(new String(temp));
 ```
 
 이러한 과정을 거치면 Packet 클래스에 추가한 아이템들(생일, 주소)의 값이 모두 세팅이 될 것이다. 이제 작성한 parse 메소드가 정상적으로 잘 동작하는지 확인해 보자.
+
+*Packet.java*
+
+```java
+(... 생략 ...)
+public static void main(String[] args) {
+        Packet recvPacket =newPacket();
+        recvPacket.addItem(Item.create("생일", 8, null));
+        recvPacket.addItem(Item.create("주소", 50, null));
+        recvPacket.parse("19801215서울시 송파구 잠실동 123-3               ");
+
+        System.out.println(recvPacket.getItem(1).raw());
+    }
+(... 생략 ...)
+```
+
+main 메소드를 위와 같이 작성하고 실행해 보자.
+
+```
+서울시 송파구 잠실동 123-3
+```
+
+두번째 항목인 "주소"가 정상적으로 파싱되어 출력된 것을 확인할 수 있다. 그런데 recvPacket에서 사용한 getItem 메소드는 사용법이 조금 불편해 보인다.
+
+```java
+recvPacket.getItem(1)
+```
+
+“주소”에 해당하는 값을 얻기 위해서는 “주소”가 몇번 째 항목인지 기억해야 하기 때문이다. 위와 같이 항목이 2개인 경우는 알기 쉽지만 항목이 50개 이상된다면 모든 항목들의 위치를 기억하고 있어야 하기 때문에 매우 불편한 방법이다.
+
+Packet 클래스에서 한 개의 Item 을 Access 하는 가장 좋은 방법은 Item 의 이름으로 Access 하는 것이다.
+
+다음과 같이 Packet 클래스를 변경해 보자.
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Packet {
+    private ArrayList<Item> items = new ArrayList<Item>();
+    private HashMap<String, Item> nameAccess = new HashMap<String, Item>();
+
+    public void addItem(Item item) {
+        this.items.add(item);
+        nameAccess.put(item.getName(), item);
+    }
+
+    public Item getItem(String name) {
+        return nameAccess.get(name);
+    }
+
+    public Item getItem(int index) {
+        return this.items.get(index);
+    }
+
+    public String raw() {
+        StringBuffer result = new StringBuffer();
+        for (Item item : items) {
+            result.append(item.raw());
+        }
+        return result.toString();
+    }
+
+    public void parse(String data) {
+        byte[] bdata = data.getBytes();
+        int pos = 0;
+        for (Item item : items) {
+            byte[] temp = new byte[item.getLength()];
+            System.arraycopy(bdata, pos, temp, 0, item.getLength());
+            pos += item.getLength();
+            item.setValue(new String(temp));
+        }
+    }
+
+    public static void main(String[] args) {
+        Packet recvPacket = new Packet();
+        recvPacket.addItem(Item.create("생일", 8, null));
+        recvPacket.addItem(Item.create("주소", 50, null));
+        recvPacket.parse("19801215서울시 송파구 잠실동 123-3               ");
+
+        System.out.println(recvPacket.getItem(1).raw());
+    }
+}
+```
+
+이름으로 아이템을 찾기 위해서 다음처럼 nameAccess 라는 HashMap 객체를 추가했다. nameAccess 의 Key는 아이템의 이름이고 Value는 Item 이다.
+
+```java
+private HashMap<String, Item> nameAccess = new HashMap<String, Item>();
+```
+
+addItem 메소드로 아이템 추가시 nameAccess 에도 동일하게 아이템이 추가되게 하기 위해서 addItem 메소드에 다음과 같은 라인을 추가했다.
+
+```java
+nameAccess.put(item.getName(), item);
+```
+
+그리고 이름으로 Item 을 가져오는 메소드인 `getItem(String, name)` 을 다음처럼 추가하였다.
+
+```java
+public Item getItem(String name) {
+	return nameAccess.get(name);
+}
+```
+
+이제 getITem(String name) 메소드를 이용하면 이름으로 아이템을 가져올 수 있게 되었다.
+
+그런데 잠깐, 여기서 주의해야 할 부분이 있다. 그것은 각각의 Item 이 동일한 이름을 사용할 수도 있다는 점이다. 이럴 경우 nameAccess 의 키가 중복될 수 있기 때문에 문제의 소지가 있다. 따라서 전문 생성시 동일한 이름으로 항목을 설정할 수 없다는 규칙을 만들어야 한다.
