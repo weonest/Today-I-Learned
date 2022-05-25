@@ -4,3 +4,4 @@ lost stories
 reset
 new start
 benkyou
+good luck
