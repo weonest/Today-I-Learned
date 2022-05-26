@@ -5,3 +5,4 @@ reset
 new start
 benkyou
 good luck
+kyousi
