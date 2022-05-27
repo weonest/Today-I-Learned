@@ -465,6 +465,23 @@ public Item getItem(String name) {
 }
 ```
 
-이제 getITem(String name) 메소드를 이용하면 이름으로 아이템을 가져올 수 있게 되었다.
+이제 `getITem(String name)` 메소드를 이용하면 이름으로 아이템을 가져올 수 있게 되었다.
 
 그런데 잠깐, 여기서 주의해야 할 부분이 있다. 그것은 각각의 Item 이 동일한 이름을 사용할 수도 있다는 점이다. 이럴 경우 nameAccess 의 키가 중복될 수 있기 때문에 문제의 소지가 있다. 따라서 전문 생성시 동일한 이름으로 항목을 설정할 수 없다는 규칙을 만들어야 한다.
+
+```java
+(...생략...)
+	public void addItem(Item item) {
+		this.items.add(item);
+		if (nameAccess.containsKey(item.getName))) {
+			throw new RuntimeException(
+					"Duplicated item name:[" + item.getName() + "]");
+		}
+		nameAccess.put(item.getName(), item);
+	}
+(...생략...)
+```
+
+addItem 메소드에 동일한 Item 이름이 입력으로 들어 올 경우 RuntimeException을 발생시키도록 변경했다. 이렇게 하면 이제 중복된 이름으로 아이템이 등록되지 않기 때문에 안심할 수 있다.
+
+이제 Packet의 아이템들을 이름으로 전급이 가능하므로 main 메소드에서 Item을 Access 하는 부분도 다음과 같이 수정이 가능하다
