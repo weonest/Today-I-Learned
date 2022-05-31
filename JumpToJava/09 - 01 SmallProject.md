@@ -485,3 +485,137 @@ public Item getItem(String name) {
 addItem 메소드에 동일한 Item 이름이 입력으로 들어 올 경우 RuntimeException을 발생시키도록 변경했다. 이렇게 하면 이제 중복된 이름으로 아이템이 등록되지 않기 때문에 안심할 수 있다.
 
 이제 Packet의 아이템들을 이름으로 전급이 가능하므로 main 메소드에서 Item을 Access 하는 부분도 다음과 같이 수정이 가능하다
+
+```java
+System.out.println(recvPacket.getItem("주소").raw());
+```
+
+## **마치며**
+
+이상과 같이 전문을 생성하고 파싱하는 프로그램을 함께 만들어 보았다.
+
+사실 우리가 만든 전문 생성 및 파싱하는 프로그램은 한가지 부족한 점이 남아있다. 주고받는 전문에는 반복구간이 있을 수 있기 때문이다. 반복구간을 설정하고 반복구간만큼 파싱하는 것은 여러분에게 도전과제로 남겨 두도록 하겠다.
+
+```
+"문법도 어느 정도 알겠고, 책의 내용도 대부분 다 이해하는데, 이러한 지식을 바탕으로 내가 도대체 어떤 프로그램을 만들 수 있을까?"
+```
+
+처음에 제기했던 위와 같은 질문에 이 작은 프로젝트가 적절한 답변이 되었기를 희망한다.
+
+다음은 작은 프로젝트의 결과물인 Item.java와 Packet.java 의 전체 소스코드이다.
+
+*Item.java*
+
+```java
+public class Item {
+private String name;
+private int length;
+private String value;
+
+public StringgetName() {
+return name;
+    }
+
+public void setName(String name) {
+        this.name = name;
+    }
+
+public int getLength() {
+	return length;
+    }
+
+public void setLength(int length) {
+        this.length = length;
+    }
+
+public String getValue() {
+	return value;
+    }
+
+public void setValue(String value) {
+        this.value = value;
+    }
+
+public String raw() {
+        StringBuffer padded = newStringBuffer(this.value);
+					while (padded.toString().getBytes().length < this.length) {
+            padded.append(' ');
+        }
+return padded.toString();
+    }
+
+public static Item create(String name, int length, String value) {
+        Item item = new Item();
+        item.setName(name);
+        item.setLength(length);
+        item.setValue(value);
+	return item;
+    }
+
+public static void main(String[] args) {
+        Item item = newItem();
+        item.setName("이름");
+        item.setLength(20);
+        item.setValue("홍길동");
+        System.out.println("[" + item.raw() + "]");
+    }
+}
+```
+
+*Packet.java*
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Packet {
+private ArrayList<Item> items = new ArrayList<Item>();
+private HashMap<String, Item> nameAccess = new HashMap<String, Item>();
+
+public void addItem(Item item) {
+        this.items.add(item);
+if (nameAccess.containsKey(item.getName())) {
+		thrownewRuntimeException(
+                    "Duplicated item name:[" + item.getName() + "]");
+        }
+        nameAccess.put(item.getName(), item);
+    }
+
+public Item getItem(String name) {
+	return nameAccess.get(name);
+    }
+
+public Item getItem(int index) {
+	return this.items.get(index);
+    }
+
+public String raw() {
+        StringBuffer result =newStringBuffer();
+	for (Item item : items) {
+            result.append(item.raw());
+        }
+	return result.toString();
+    }
+
+public void parse(String data) {
+        byte[] bdata = data.getBytes();
+        int pos = 0;
+for (Item item : items) {
+            byte[] temp =newbyte[item.getLength()];
+            System.arraycopy(bdata, pos, temp, 0, item.getLength());
+            pos += item.getLength();
+            item.setValue(newString(temp));
+        }
+    }
+
+public static void main(String[] args) {
+        Packet recvPacket = newPacket();
+        recvPacket.addItem(Item.create("생일", 8, null));
+        recvPacket.addItem(Item.create("주소", 50, null));
+        recvPacket.parse("19801215서울시 송파구 잠실동 123-3               ");
+
+        System.out.println(recvPacket.getItem("주소").raw());
+    }
+}
+```
+
