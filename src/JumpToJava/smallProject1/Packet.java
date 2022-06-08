@@ -1,12 +1,23 @@
 package JumpToJava.smallProject1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Packet {
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<Item>();
+    private HashMap<String, Item> nameAccess = new HashMap<String, Item>();
 
     public void addItem(Item item) {
         this.items.add(item);
+        if (nameAccess.containsKey(item.getName())) {
+            throw new RuntimeException(
+                    "Duplicated item name:[" + item.getName() + "]");
+        }
+        nameAccess.put(item.getName(), item);
+    }
+
+    public Item getItem(String name) {
+        return nameAccess.get(name);
     }
 
     public Item getItem(int index) {
@@ -21,22 +32,23 @@ public class Packet {
         return result.toString();
     }
 
+    public void parse(String data) {
+        byte[] bdata = data.getBytes();
+        int pos = 0;
+        for (Item item : items) {
+            byte[] temp = new byte[item.getLength()];
+            System.arraycopy(bdata, pos, temp, 0, item.getLength());
+            pos += item.getLength();
+            item.setValue(new String(temp));
+        }
+    }
+
     public static void main(String[] args) {
-        Packet packet = new Packet();
+        Packet recvPacket = new Packet();
+        recvPacket.addItem(Item.create("생일", 8, null));
+        recvPacket.addItem(Item.create("주소", 50, null));
+        recvPacket.parse("19980729수원시 방안구 무무동 958-30              ");
 
-        Item item1 = new Item();
-        item1.setName("이름");
-        item1.setLength(20);
-        item1.setValue("원건희");
-
-        Item item2 = new Item();
-        item2.setName("전화번호");
-        item2.setLength(11);
-        item2.setValue("01077590672");
-
-        packet.addItem(item1);
-        packet.addItem(item2);
-
-        System.out.println("[" + packet.raw() + "]");
+        System.out.println(recvPacket.getItem("주소").raw());
     }
 }

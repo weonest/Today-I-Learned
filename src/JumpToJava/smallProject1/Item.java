@@ -36,6 +36,15 @@ public class Item {
         }
         return padded.toString();
     }
+
+    public static Item create(String name, int length, String value) {
+        Item item = new Item();
+        item.setName(name);
+        item.setLength(length);
+        item.setValue(value);
+        return item;
+    }
+
     public static void main(String[] args) {
         Item item = new Item();
         item.setName("이름");
@@ -44,4 +53,3 @@ public class Item {
         System.out.println("[" + item.raw() + "]");
     }
 }
-
