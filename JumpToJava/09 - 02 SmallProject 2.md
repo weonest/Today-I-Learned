@@ -262,3 +262,133 @@ public static int getYearDay(int year) {
 ```
 
 ## TDD의 흐름을 알아보자
+
+------
+
+이전에 단순히 테스트를 통과하기 급급한 메소드가 “당연한” 코드로 바뀌는 모습에 주목. 이젠 전월까지의 총 일수를 구해보도록 하자.
+
+```java
+public void testGetMonthDay() {
+	asserEquals(0, SubDate.getMonthDay(1));
+	assertEquals(31, SubDate.getMonthDay(2));
+}
+public static int getMonthDay(int month) {
+    if (month == 1) return 0;
+    else return 31;
+}
+```
+
+구하려는 일수에 포함되는 2월이 29일까지 있는지, 28일까지 있는지 어떻게 알까?
+
+2월, 즉 윤달에 대한 처리를 어떻게 할 것인가? 하는 점이다. 20070515라는 날짜의 총 일수를 구하려 할 때 다음과 같은 전략을 세웠던 것을 기억해 보자.
+
+`2007년 5월 15일의 총 일수 = 0년 부터 2006년 까지의 총 일수 + 2007년 1월 부터 4월 까지의 총 일수 + 15` 즉, 2007년 1월 부터 4월까지의 총 일수는 31 + 28 (2007년이 윤년이 아니기 때문) + 31 + 30 이 되는 것을 알 수 있다. 테스트 코드에 이러한 의도를 담아 다음과 같이 작성할 수 있다.
+
+```java
+public void testGetMonthDay() {
+    assertEquals(0, SubDate.getMonthDay(1, true));
+    assertEquals(31, SubDate.getMonthDay(2, false));
+}
+```
+
+2월이 윤달인지 아닌지를 두 번째 파라미터로 보내겠다는 의도이다. (총 일수를 구하려는 일자의 연도가 윤년인 경우는 true, 윤년이 아닌 경우는 false 이다) 컴파일이 되기 위한 실제 코드는 다음과 같이 변해야 한다.
+
+```java
+public static int getMonthDay(int month, boolean isLeap) {
+    if (month == 1) return 0;
+    else return 31;
+}
+```
+
+이제 테스트 코드에 윤달 부분을 테스트할 수 있도록 추가해보 자.
+
+```java
+assertEquals(31+28, SubDate.getMonthDay(3, false));
+assertEquals(31+29, SubDate.getMonthDay(3, true));
+```
+
+3월 전달까지의 총일수를 윤달이 낀 경우와 아닌 경우를 테스트하는 것이다. 테스트를 통과하기 위해서 실제코드는 다음과 같이 변할 것이다.
+
+```java
+static final int[] monthDays = {
+    31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+public static int getMonthDay(int month, boolean isLeap) {
+    int result = 0;
+    for(int i=1; i< month; i++) {
+        result += monthDays[i-1];
+    }
+
+    if (isLeap && month > 2) result += 1;
+    return result;
+}
+```
+
+- 전월까지의 총 일수를 구한다.
+
+- > 해당일자까지의 총 일수를 구한다.
+
+자 이젠 전월까지의 총 일수를 구했으므로 해당일자의 총 일수를 구하면 될 것이다. 하지만 해당일자의 총 일수는 일자 값 그자체이므로 테스트가 필요 없다고 생각된다.
+
+- 해당일자까지의 총 일수를 구한다.
+
+- > 특정 일자의 총 일수를 구한다.
+
+이제 특정 일자의 총 일수를 구해보도록 하자.
+
+```java
+public void testGetTotalDay() {
+    assertEquals(1, SubDate.getTotalDay("00010101"));
+    assertEquals(366, SubDate.getTotalDay("00020101"));
+}
+```
+
+1년 1월 1일의 총 일수는 1일이 될 것이고, 2년 1월 1일까지의 총 일수는 366일이 되어야 한다. 테스트를 통과하기 위한 실제코드를 작성하면 다음과 같다.
+
+```java
+public static int getTotalDay(String date) {
+    int year = Integer.parseInt(date.substring(0, 4));
+    int month = Integer.parseInt(date.substring(4, 6));
+    int day = Integer.parseInt(date.substring(6, 8));
+    return getYearDay(year)
+        + getMonthDay(month, isLeapYear(year))
+        + day;
+}
+```
+
+- 두 날짜(YYYYMMDD)의 차이일자를 구한다.
+- 특정일자의 총 일수를 구한다.
+
+자 이제 마지막 두 날짜의 차이 일자를 구하는 우리의 마지막 테스트가 남아 있다. 테스트 코드는 아래와 같다.
+
+```java
+public void testSubDate() {
+    assertEquals(1, SubDate.sub("20061231", "20070101"));
+    assertEquals(31+28+30+31+14, 
+            SubDate.sub("20070101", "20070515"));
+    assertEquals(31+29+30+31+14, 
+            SubDate.sub("20080101", "20080515"));
+}
+```
+
+테스트를 통과하려면
+
+```java
+public static int sub(String date1, String date2) {
+    return Math.abs(getTotalDay(date1) - getTotalDay(date2));
+}
+```
+
+## 마치며
+
+------
+
+TDD에 대한 모든 것을 다 설명하기엔 부족한 예제이지만 TDD가 무엇인지 감을 잡을 수 있는 예제였으리라 생각한다. 독자 중에는 "이렇게 쉬운 문제를 뭐 하러 귀찮게 TDD로 해야 하나?"라고 반문할 수도 있겠지만 TDD가 숙달되면 이 정도의 쉬운 문제라도 TDD를 사용하는 것이 더 빠르고 즐거운 길이 된다는 것을 곧 깨닫게 될 것이다. 당연히 프로그램이 복잡해지고 어려워질수록 TDD는 더욱더 큰 힘을 발휘하게 된다.
+
+TDD는 자바 언어를 배우거나 XML-RPC등의 개념을 배우는 것과는 매우 다르다. 지식 기반이 아니라 경험에서 우러나오는 것이기 때문이다. XML-RPC의 개념에 대해서 알게 되면 그것을 바로 써먹을 수 있지만 TDD는 사뭇 다르다. TDD가 무엇을 하는 것인지 알게 되어도 능숙해지려면 꽤나 시간이 걸리기 때문이다. 무협지를 보라. 내공이 하루아침에 쌓이는 경우가 있는가? TDD의 가능성을 본 독자라면 꼭 "용기와 끈기"를 가지고 부단히 노력해 볼 것을 다시한번 당부한다. 마지막으로 다음의 책을 꼭 한번 일독할 것을 추천하며 이 글을 마무리할까 한다.
+
+- Test Driven Development By Example (By Kent Beck)
+
+**참고자료**
+
+- Test Driven Development By Example (By Kent Beck)
+- 한국 XP 사용자 모임, http://xper.org
