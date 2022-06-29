@@ -16,3 +16,5 @@ moukeru 설치하다
 osamaru 걷히다, 돌아오다
 torokeru 녹다
 totonou 구비되다, 성립되다
+menmitu 면밀
+
