@@ -22,3 +22,4 @@ obieru 겁먹다
 syousika
 obandesu
 kaerikai
+goback
