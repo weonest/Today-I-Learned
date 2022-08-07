@@ -23,3 +23,4 @@ syousika
 obandesu
 kaerikai
 goback
+hokokusyo
