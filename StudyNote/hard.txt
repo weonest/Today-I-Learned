@@ -3,3 +3,4 @@ gd
 GOING HOME
 home sweet home~
 lucky
+translator
