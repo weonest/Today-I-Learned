@@ -6,3 +6,4 @@ lucky
 translator
 Report
 slump
+DEMON
