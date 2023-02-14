@@ -1,23 +1,26 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 class Solution {
-    public String solution(String s, String skip, int index) {
+    public int solution(String t, String p) {
+        int answer = 0;
 
-        char[] words = s.toCharArray();
-        for (int i = 0; i < words.length; i++) {
-            for (int j = 0; j < index; j++) {
-                do {
-                    words[i]++;
-                    if (words[i] > 'z') {
-                        words[i] -= 26;
-                    }
-                } while (skip.contains(String.valueOf(words[i])));
+        for (int i = 0; i <= t.length() - p.length(); i++) {
+            String tmp = t.substring(0 + i, p.length()+i);
+            System.out.println(tmp);
+
+            if (Long.parseLong(tmp) <= Long.parseLong(p)) {
+                answer++;
             }
         }
-            String answer = String.valueOf(words);
-            return answer;
+        return answer;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.solution("3141592", "271"));
+        System.out.println(sol.solution("10203", "15"));
     }
 }
