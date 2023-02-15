@@ -1,44 +1,47 @@
-import java.sql.ClientInfoStatus;
 import java.util.*;
 
 class Solution {
-    public int[] solution(int[] answers) {
+    public int[] solution(String[] id_list, String[] report, int k) {
+        int[] answer = new int[id_list.length];
 
+        Map<String, HashSet<String>> reporterMap = new HashMap<>();
+        Map<String, Integer> reportedMap = new HashMap<>();
+        Set<String> reportSet = new HashSet<>(Arrays.asList(report));
 
-        int[] a = {1, 2, 3, 4, 5};
-        int[] b = {2, 1, 2, 3, 2, 4, 2, 5};
-        int[] c = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
-        int[] score = new int[3];
-
-        for (int i = 0; i < answers.length; i++) {
-            if (answers[i] == a[i % 5]) score[0]++;
-            if (answers[i] == b[i % 8]) score[1]++;
-            if (answers[i] == c[i % 10]) score[2]++;
+        for (String s : reportSet) {
+            String reporter = s.split(" ")[0];
+            String reported = s.split(" ")[1];
+            reporterMap.putIfAbsent(reporter, new HashSet<String>(){{ // 아마도 익명함수
+                add(reported);
+            }});
+            reporterMap.get(reporter).add(reported);
+            reportedMap.put(reported, reportedMap.getOrDefault(reported, 0) + 1);
         }
 
-        int max = Math.max(score[0], Math.max(score[1], score[2]));
 
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < score.length; i++) {
-            if (max == score[i]) {
-                list.add(i + 1);
+        for (String reported : reportedMap.keySet()) {
+            int reportedCnt = reportedMap.get(reported);
+            if (reportedCnt >= k) {
+                for (int i = 0; i < id_list.length; i++) {
+                    if (reporterMap.containsKey(id_list[i]) && reporterMap.get(id_list[i]).contains(reported)) {
+                        answer[i]++;
+                    }
+                }
             }
         }
-        int[] answer = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            answer[i] = list.get(i);
-        }
+
+
         return answer;
     }
 
-
-
-
     public static void main(String[] args) {
 
-        int[] answer = {1,3,2,4,2,3,1,4,2};
-//        int[] answer = {1, 3, 2, 4, 2};
+//        String[] id_list = {"muzi", "frodo", "apeach", "neo"};
+//        String[] report = {"muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"};
+        String[] id_list = {"con", "ryan"};
+        String[] report = {"ryan con", "ryan con", "ryan con", "ryan con"};
+        int k = 2;
         Solution sol = new Solution();
-        System.out.println(sol.solution(answer));
+        sol.solution(id_list, report, k);
     }
 }
