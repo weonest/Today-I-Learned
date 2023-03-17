@@ -1,40 +1,31 @@
-
 class Solution {
-        int answer = 0;
-    public int solution(int a, int b, int n) {
+    public String solution(String X, String Y) {
+        String answer = "";
+        StringBuffer sb = new StringBuffer();
 
+        int[] XX = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        //          1  0  0  0  0  0  2  0  0  0
+        //          1  0  1  0  1  0  2  0  0  0
 
-
-        getAnswer(a, b, n);
-
-        System.out.println("answer = " + answer);
-        return answer;
-    }
-
-    public void getAnswer(int a, int b, int n) {
-
-        if (n < a) {
-            return;
+        int[] YY = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0; i < X.length(); i++) {
+            XX[X.charAt(i) - 48] += 1;
         }
-        int tmp = (n / a) * b;
-        System.out.println("tmp = " + tmp);
+        for (int i = 0; i < Y.length(); i++) {
+            YY[Y.charAt(i) - 48] += 1;
+        }
 
-        int ret = tmp + (n % a);
-        System.out.println("ret = " + ret);
-        answer += tmp;
-
-        getAnswer(a, b, ret);
-    }
-
-
-    public static void main(String[] args) {
-
-        int a = 5;
-        int b = 3;
-        int n = 21;
-
-        Solution sol = new Solution();
-        sol.solution(a, b, n);
-
+        for (int i = 9; i >= 0; i--) {
+            for (int j = 0; j < Math.min(XX[i], YY[i]); j++) {
+                sb.append(i);
+            }
+        }
+        if (sb.toString().equals("")) {
+            return "-1";
+        } else if (sb.toString().charAt(0) == '0') {
+            return "0";
+        } else {
+            return sb.toString();
+        }
     }
 }
