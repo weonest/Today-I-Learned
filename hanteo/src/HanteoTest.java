@@ -38,14 +38,14 @@ public class HanteoTest {
             }
             return;
         }
-        dfs(idx, depth + 1, tmp + coins[idx]);
         dfs(idx+1, depth + 1, tmp + coins[idx+1]);
+        dfs(idx, depth + 1, tmp + coins[idx]);
     }
 
 
     public static void main(String[] args) {
         HanteoTest han = new HanteoTest();
-        int[] arr = {2, 3};
+        int[] arr = {2, 5, 3, 6};
         han.solution(10, arr);
 
     }

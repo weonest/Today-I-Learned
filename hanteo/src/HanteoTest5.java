@@ -1,15 +1,17 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class HanteoTest4 {
+public class HanteoTest5 {
 
     static int sum = 10;
+    //    static int sum = 4;
     static int answer = 0;
+    static Set<String> set = new HashSet<>();
+    static List<String> lis = new ArrayList<>();
 
 
     public static void main(String[] args) {
-        Set<Integer> set = new HashSet<>();
-        int[] coins = {2,3, 5, 6};
+        int[] coins = {2, 3, 5, 6};
+//        int[] coins = {1, 2, 3};
         int[] numbers;
 //        List<Integer> list = Arrays.stream(coins).boxed().collect(Collectors.toList());
         Combination2 com = new Combination2();
@@ -23,7 +25,7 @@ public class HanteoTest4 {
 
 
         // 2. 1 < n < coins.length 개의 숫자를 이용하여 구현이 가능한지
-        for (int i = 2; i < coins.length; i+=2) {
+        for (int i = 2; i < coins.length; i += 2) {
 
             numbers = new int[i];
 
@@ -47,16 +49,15 @@ public class HanteoTest4 {
                     arrSum += arr[j].charAt(k) - 48;
                     check += arr[j].charAt(k);
                 }
-                    set.add(check);
-                    System.out.println("set = " + set);
                 if (arrSum > sum) {
                     continue;
-                } else if (sum - arrSum == 0) {
+                } else if (sum - arrSum == 0 || arrSum*2 == sum) {
                     answer++;
                 } else {
                     System.out.println("check = " + check);
                     System.out.print("arrSum = " + arrSum + ", ");
                     canDivide(coins, sum - arrSum);
+//                    distinct(arr[j], coins, arrSum);
                 }
             }
 
@@ -65,11 +66,25 @@ public class HanteoTest4 {
 
     }
 
+    public static void distinct(String arr, int[] coins, int value) {
+        int dis = 0;
+        System.out.println("value = " + value);
+        String tmp = "";
+
+        for (int i = 0; i < coins.length; i++) {
+            dis = value + coins[i];
+            if (dis == sum) {
+            tmp += arr + coins[i];
+            lis.add(tmp);
+            }
+        }
+        System.out.println("lis = " + lis);
+    }
+
     public static boolean canDivide(int[] coins, int value) {
         boolean flag = false;
         for (int i = 0; i < coins.length; i++) {
             if (value % coins[i] == 0) {
-
                 System.out.println("value = " + value);
                 answer++;
                 flag = true;
