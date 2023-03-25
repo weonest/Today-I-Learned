@@ -1,4 +1,5 @@
-import java.awt.font.FontRenderContext;
+package Practice;
+
 import java.util.*;
 
 public class HanteoTest2 {
@@ -48,7 +49,7 @@ public class HanteoTest2 {
 
             if (stack.size() > sum/coins[i]) {
                 stack.pop();
-                if (coins.length-1 == i || stack.lastElement()) {
+                if (coins.length-1 == i || stack.get(stack.size())-1 == 6) {
                     stack.set(stack.size() - 1, 0);
                 }
             }
