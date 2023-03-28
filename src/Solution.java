@@ -1,31 +1,21 @@
 class Solution {
-    public String solution(String X, String Y) {
-        String answer = "";
-        StringBuffer sb = new StringBuffer();
-
-        int[] XX = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        //          1  0  0  0  0  0  2  0  0  0
-        //          1  0  1  0  1  0  2  0  0  0
-
-        int[] YY = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        for (int i = 0; i < X.length(); i++) {
-            XX[X.charAt(i) - 48] += 1;
-        }
-        for (int i = 0; i < Y.length(); i++) {
-            YY[Y.charAt(i) - 48] += 1;
-        }
-
-        for (int i = 9; i >= 0; i--) {
-            for (int j = 0; j < Math.min(XX[i], YY[i]); j++) {
-                sb.append(i);
+    public int solution(String[] babblings) {
+        // "aya", "ye", "woo", "ma" 4가지 발음만 가능
+        int answer = 0;
+        for(int i = 0; i < babblings.length; i++) {
+            if(babblings[i].contains("ayaaya") || babblings[i].contains("yeye") || babblings[i].contains("woowoo") || babblings[i].contains("mama")) {
+                continue;
             }
+
+            babblings[i] = babblings[i].replace("aya", " ");
+            babblings[i] = babblings[i].replace("ye", " ");
+            babblings[i] = babblings[i].replace("woo", " ");
+            babblings[i] = babblings[i].replace("ma", " ");
+            babblings[i] = babblings[i].replace(" ", "");
+
+            if(babblings[i].length()  == 0) answer++;
+
         }
-        if (sb.toString().equals("")) {
-            return "-1";
-        } else if (sb.toString().charAt(0) == '0') {
-            return "0";
-        } else {
-            return sb.toString();
-        }
+        return answer;
     }
 }
