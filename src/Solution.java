@@ -1,43 +1,28 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 class Solution {
+    public int[] solution(String[] name, int[] yearning, String[][] photo) {
+        int[] answer = new int[photo.length];
 
-    public int[] solution(String[] keymap, String[] targets) {
-        int[] answer = new int[targets.length];
 
-        Map<Character, Integer> map = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
 
-        for (int i = 0; i < keymap.length; i++) {
-            String str = keymap[i];
+        for (int i = 0; i < name.length; i++) {
+            map.put(name[i], yearning[i]);
+        }
 
-            for (int j = 0; j < str.length(); j++) {
-                char c = str.charAt(j);
-                if (map.containsKey(c)) {
-                    map.put(c, Math.min(j + 1, map.get(c)));
+        for (int i = 0; i < photo.length; i++) {
+
+            for (int j = 0; j < photo[i].length; j++) {
+                if (map.containsKey(photo[i][j])) {
+                    answer[i] += map.get(photo[i][j]);
                 } else {
-                    map.put(c, j + 1);
+                    continue;
                 }
             }
         }
 
-        System.out.println("map = " + map);
-
-
-        for (int i = 0; i < targets.length; i++) {
-            String str = targets[i];
-            for (int j = 0; j < str.length(); j++) {
-                char c = str.charAt(j);
-
-                if (map.containsKey(c)) {
-                    answer[i] += map.get(c);
-                }else {
-                    answer[i] = -1;
-                    break;
-                }
-
-                System.out.println("map.get(c) = " + map.get(c));
-            }
-        }
 
         return answer;
     }
