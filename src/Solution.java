@@ -1,30 +1,17 @@
+import java.util.Arrays;
+
 class Solution {
-    public String solution(int[] food) {
-        String answer = "";
+    public int solution(int[][] sizes) {
+        int answer = 0;
 
+        int max = 0, min = 0;
 
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 1; i < food.length; i++) {
-            int tmp = food[i];
-
-            if (tmp < 1) continue;
-
-            if (tmp % 2 == 1) {
-                tmp = tmp - 1;
-            }
-            tmp /= 2;
-
-            for (int j = 0; j < tmp; j++) {
-                sb.append(i);
-            }
-
-
+        for (int[] size : sizes) {
+            max = Math.max(max, Math.max(size[0], size[1]));
+            min = Math.max(min, Math.min(size[0], size[1]));
         }
-        answer += sb + "0";
-        answer += sb.reverse();
 
-        System.out.println("sb = " + sb);
+        answer = max * min;
 
         return answer;
     }
