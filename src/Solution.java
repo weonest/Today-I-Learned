@@ -1,13 +1,22 @@
 class Solution {
-    public long solution(int price, int money, int count) {
-        long answer = money;
+    public int solution(int left, int right) {
+        int answer = 0;
 
-        // 3 20 4 10  // 3 + 6 + 9 + 12 = 30 // 30 - 20 = 10
-
-        for (int i = 1; i <= count; i++) {
-            answer -= price * i;
+        for (int i = left; i <= right; i++) {
+            int cnt = 0;
+            for (int j = 1; j <= i; j++) {
+                if (i % j == 0) {
+                    cnt++;
+                }
+            }
+            System.out.println("cnt = " + cnt);
+            if (cnt % 2 == 0) {
+                answer += i;
+            } else {
+                answer -= i;
+            }
         }
 
-        return answer > 0 ? 0 : -answer;
+        return answer;
     }
 }
