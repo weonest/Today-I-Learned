@@ -1,27 +1,13 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 class Solution {
-    public int solution(int[] numbers) {
-        int answer = -1;
+    public long solution(int price, int money, int count) {
+        long answer = money;
 
-        int[] arr = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        // 3 20 4 10  // 3 + 6 + 9 + 12 = 30 // 30 - 20 = 10
 
-        List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
-
-        System.out.println("list = " + list);
-
-        for (int i = 0; i < numbers.length; i++) {
-            if (list.contains(numbers[i])) {
-                list.remove(list.indexOf(numbers[i]));
-            }
+        for (int i = 1; i <= count; i++) {
+            answer -= price * i;
         }
-        if (list.size() > 0) answer = list.stream().mapToInt(Integer::intValue).sum();
 
-        return answer;
+        return answer > 0 ? 0 : -answer;
     }
-
-    // 초간단 풀이..
-    // return 45 - Array.stream(arr).sum();
 }
