@@ -1,19 +1,27 @@
+import java.util.*;
+
 class Solution {
+    public int[] solution(int n, String[] words) {
+        int[] answer = new int[2];
 
-    int[] arr;
-    public int solution(int n) {
-        int answer = 0;
-        arr = new int[n + 1];
+        List<String> list = new ArrayList<>();
+        list.add(words[0]);
 
-        return answer = recursive(n);
-    }
+        char target = words[0].charAt(words[0].length() - 1);
+        for (int i = 1; i < words.length; i++) {
 
-    public int recursive(int num) {
-        if (arr[num] > 0) return arr[num];
-
-        if (num < 2) {
-            return num;
+            if (!list.contains(words[i]) && target == words[i].charAt(0)) {
+                list.add(words[i]);
+                target = words[i].charAt(words[i].length() - 1);
+            } else {
+                answer[0] = i % n + 1;
+                answer[1] = i / n + 1;
+                break;
+            }
         }
-        return arr[num] = (recursive(num - 2) + recursive(num-1)) % 1234567;
+
+        System.out.println("Arrays.toString(answer) = " + Arrays.toString(answer));
+
+        return answer;
     }
 }
