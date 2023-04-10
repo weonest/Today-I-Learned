@@ -1,42 +1,42 @@
-import java.util.Arrays;
-
 class Solution {
-    int cnt = 0;
-    int zeroCnt = 0;
 
-    public int[] solution(String s) {
-        int[] answer = new int[2];
+    public int solution(int n) {
+        int answer = 1;
 
-        recursive(s);
-        answer[0] = cnt;
-        answer[1] = zeroCnt;
+        for (int i = 1; i < n; i++) {
+            int tmp = i;
+            int sum = 0;
 
+            while (tmp != n) {
+                sum += tmp;
+                tmp++;
+                if (sum >= n) {
+                    break;
+                }
+            }
+            if (sum == n) answer++;
+        }
         return answer;
     }
 
-    public void recursive(String s) {
-        if (s.equals("1")) {
-            return;
-        }
 
-        String tmp = Integer.toBinaryString(convert(s).length());
-        cnt++;
-        recursive(tmp);
+    /**
+     * 재귀
+     */
+    //for (int i = 1; i < n; i++) {
+    //        recursive(n, i, 0);
+    //
+    //        }
 
-    }
-
-    public String convert(String s) {
-        String tmp = "";
-        for (String str : s.split("")) {
-            if (str.equals("0")) {
-                zeroCnt++;
-                continue;
-            }
-            else {
-                tmp += str;
-            }
-        }
-        return tmp;
-    }
-
+    // public void recursive(int n, int idx, int sum) {
+    //        if (sum >= n) {
+    //            if (sum == n) {
+    //                answer++;
+    //            }
+    //            return;
+    //        }
+    //
+    //        recursive(n, idx + 1, sum + idx);
+    //
+    //    }
 }
