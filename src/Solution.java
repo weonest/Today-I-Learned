@@ -1,26 +1,42 @@
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.PriorityQueue;
 
-class Solution
-{
-    public int solution(int []A, int []B)
-    {
-        int answer = 0;
+class Solution {
+    int cnt = 0;
+    int zeroCnt = 0;
 
+    public int[] solution(String s) {
+        int[] answer = new int[2];
 
-        PriorityQueue<Integer> queue1 = new PriorityQueue<>();
-        PriorityQueue<Integer> queue2 = new PriorityQueue<>(Collections.reverseOrder());
-
-        for (int i = 0; i < A.length; i++) {
-            queue1.add(A[i]);
-            queue2.add(B[i]);
-        }
-
-        while (!queue1.isEmpty()) {
-            answer += queue1.poll() * queue2.poll();
-        }
+        recursive(s);
+        answer[0] = cnt;
+        answer[1] = zeroCnt;
 
         return answer;
     }
+
+    public void recursive(String s) {
+        if (s.equals("1")) {
+            return;
+        }
+
+        String tmp = Integer.toBinaryString(convert(s).length());
+        cnt++;
+        recursive(tmp);
+
+    }
+
+    public String convert(String s) {
+        String tmp = "";
+        for (String str : s.split("")) {
+            if (str.equals("0")) {
+                zeroCnt++;
+                continue;
+            }
+            else {
+                tmp += str;
+            }
+        }
+        return tmp;
+    }
+
 }
