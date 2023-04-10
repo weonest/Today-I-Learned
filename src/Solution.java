@@ -1,36 +1,26 @@
 import java.util.Arrays;
-import java.util.Locale;
+import java.util.Collections;
+import java.util.PriorityQueue;
 
-class Solution {
-    public String solution(String str) {
-        String s = str.toLowerCase();
+class Solution
+{
+    public int solution(int []A, int []B)
+    {
+        int answer = 0;
 
-        StringBuilder answer = new StringBuilder();
 
-        String firstStr = s.charAt(0) + "";
-        answer.append(firstStr.toUpperCase());
+        PriorityQueue<Integer> queue1 = new PriorityQueue<>();
+        PriorityQueue<Integer> queue2 = new PriorityQueue<>(Collections.reverseOrder());
 
-        for (int i = 1; i < s.length(); i++) {
-
-            String cur = s.charAt(i) + "";
-            System.out.println("cur = " + cur);
-
-            if (cur.equals(" ")) {
-                answer.append(" ");
-            } else if (s.charAt(i - 1) == ' ') {
-                answer.append(cur.toUpperCase());
-            } else {
-                answer.append(cur);
-            }
-
+        for (int i = 0; i < A.length; i++) {
+            queue1.add(A[i]);
+            queue2.add(B[i]);
         }
-        System.out.println("answer.toString() = " + answer.toString());
-        return answer.toString();
-    }
 
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        sol.solution("a   a   a   a ");
-        // 무조건 공백은 하나만 남겨야 하는 건 줄
+        while (!queue1.isEmpty()) {
+            answer += queue1.poll() * queue2.poll();
+        }
+
+        return answer;
     }
 }
