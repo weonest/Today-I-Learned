@@ -1,27 +1,30 @@
-import java.util.Stack;
+import java.util.*;
 
 class Solution {
+    public int solution(int[] people, int limit) {
+        int answer = 0;
 
-    public static int solution(String s) {
+        Deque<Integer> que = new ArrayDeque<>();
 
-        Stack<Character> stack = new Stack<>();
+        Arrays.sort(people);
 
-        int idx = 0;
-
-        while (idx < s.length()) {
-            char c = s.charAt(idx);
-
-            if (!stack.isEmpty() && stack.peek() == c) {
-                stack.pop();
-            }
-            else {
-                stack.push(c);
-            }
-            idx++;
+        for (Integer i : people) {
+            que.add(i);
         }
-        if (stack.isEmpty()) {
-            return 1;
+
+        while (que.size() > 0) {
+
+            if (que.peek() + que.peekLast() > limit) {
+                que.pollLast();
+                answer++;
+            }
+            else if (que.peek() + que.peekLast() <= limit){
+                que.poll();
+                que.pollLast();
+                answer++;
+            }
         }
-        return 0;
+
+        return answer;
     }
 }
