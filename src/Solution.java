@@ -1,25 +1,62 @@
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 class Solution {
-    public int solution(int[] citations) {
+    public int solution(String s) {
         int answer = 0;
 
-        Arrays.sort(citations);
+        if (check(s)) {
+            answer++;
+        }
 
-
-        // 0 1 3 5 6
-        // 0 1 2 3 4
-
-
-        for (int i = 0; i < citations.length; i++) {
-
-            if (citations[i] >= citations.length - i) {
-                answer = citations.length - i;
-                break;
+        for (int i = 1; i < s.length(); i++) {
+            System.out.println(i);
+            s = rotate(s);
+            if (check(s)) {
+                answer++;
             }
         }
 
         return answer;
+    }
+
+    public String rotate(String s) {
+        s = s.substring(1) + s.charAt(0);
+        return s;
+    }
+
+    public boolean check(String s) {
+        Stack<Character> stack = new Stack<>();
+        // ({})[]
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (!stack.isEmpty()) {
+                switch (c) {
+                    case ')':
+                        compare(stack, '(');
+                        break;
+                    case '}':
+                        compare(stack, '{');
+                        break;
+                    case ']':
+                        compare(stack, '[');
+                        break;
+                }
+            } else {
+                stack.push(c);
+            }
+            System.out.println("stack = " + stack);
+        }
+        return stack.isEmpty();
+
+    }
+
+    public void compare(Stack<Character> stack, char c) {
+        if (stack.peek() == c) {
+            stack.pop();
+        }
     }
 }
