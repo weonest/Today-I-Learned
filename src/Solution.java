@@ -1,19 +1,25 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
 
-public class Solution {
-    public int solution(int n) {
-        int ans = 1;
+class Solution {
+    public int solution(int[] citations) {
+        int answer = 0;
+
+        Arrays.sort(citations);
 
 
-        while (n != 1) {
-            if (n % 2 == 0) {
-                n /= 2;
-            } else {
-                n--;
-                ans++;
+        // 0 1 3 5 6
+        // 0 1 2 3 4
+
+
+        for (int i = 0; i < citations.length; i++) {
+
+            if (citations[i] >= citations.length - i) {
+                answer = citations.length - i;
+                break;
             }
         }
 
-        return ans;
+        return answer;
     }
 }
