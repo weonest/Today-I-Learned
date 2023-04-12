@@ -1,62 +1,46 @@
-import java.util.*;
+import java.util.Arrays;
 
 class Solution {
-    public int solution(String s) {
-        int answer = 0;
+    int n = 0;
+    
+    public String[] solution(int n, int[] arr1, int[] arr2) {
+        String[] answer = new String[n];
+        this.n = n;
 
-        if (check(s)) {
-            answer++;
-        }
+        for (int i = 0; i < n; i++) {
+            String bin1 = Integer.toBinaryString(arr1[i]);
+            String bin2 = Integer.toBinaryString(arr2[i]);
 
-        for (int i = 1; i < s.length(); i++) {
-            System.out.println(i);
-            s = rotate(s);
-            if (check(s)) {
-                answer++;
+            String cod1 = plusLength(bin1);
+            String cod2 = plusLength(bin2);
+
+            String row = "";
+
+            for (int j = 0; j < n; j++) {
+                String cur1 = cod1.charAt(j) + "";
+                String cur2 = cod2.charAt(j) + "";
+
+                if (cur1.equals("1") || cur2.equals("1")) {
+                    row += "#";
+                }else{
+                    row += " ";
+                }
             }
+            answer[i] = row;
+
         }
 
         return answer;
     }
 
-    public String rotate(String s) {
-        s = s.substring(1) + s.charAt(0);
-        return s;
-    }
-
-    public boolean check(String s) {
-        Stack<Character> stack = new Stack<>();
-        // ({})[]
-
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-
-            if (c == '(' || c == '{' || c == '[') {
-                stack.push(c);
-            } else if (!stack.isEmpty()) {
-                switch (c) {
-                    case ')':
-                        compare(stack, '(');
-                        break;
-                    case '}':
-                        compare(stack, '{');
-                        break;
-                    case ']':
-                        compare(stack, '[');
-                        break;
-                }
-            } else {
-                stack.push(c);
+    public String plusLength(String bin) {
+        if (bin.length() != n) {
+            String zero = "";
+            for (int i = 0; i < n - bin.length(); i++) {
+                zero += "0";
             }
-            System.out.println("stack = " + stack);
+            bin = zero + bin;
         }
-        return stack.isEmpty();
-
-    }
-
-    public void compare(Stack<Character> stack, char c) {
-        if (stack.peek() == c) {
-            stack.pop();
-        }
+        return bin;
     }
 }
