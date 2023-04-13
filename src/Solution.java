@@ -1,32 +1,26 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 class Solution {
     public String[] solution(String[] players, String[] callings) {
-        String[] answer = new String[players.length];
 
-        Map<Integer, String> map = new HashMap<>();
-
-        int rank = 1;
-        for (String val : players) {
-            map.put(rank, val);
+        int rank = 0;
+        Map<String, Integer> map = new HashMap<>();
+        for (String s : players) {
+            map.put(s, rank);
             rank++;
         }
-        System.out.println("map = " + map);
 
-        for (int i = 1; i < callings.length; i++) {
+        for (int i = 0; i < callings.length; i++) {
+            int cur = map.get(callings[i]);
 
-            if ()
+            map.put(callings[i], cur - 1);
+            map.put(players[cur - 1], cur);
 
-            }
-
+            players[cur] = players[cur - 1];
+            players[cur - 1] = callings[i];
         }
 
-
-
-        return answer;
+        return players;
     }
 
 }
