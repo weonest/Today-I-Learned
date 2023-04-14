@@ -1,26 +1,22 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 class Solution {
-    public String[] solution(String[] players, String[] callings) {
+    public List<Long> solution(int n, long left, long right) {
 
-        int rank = 0;
-        Map<String, Integer> map = new HashMap<>();
-        for (String s : players) {
-            map.put(s, rank);
-            rank++;
+        List<Long> list = new ArrayList<>();
+
+        for (long i = left; i < right+1; i++) {
+
+            list.add(Math.max(i / n, i % n) + 1);
+
+
         }
 
-        for (int i = 0; i < callings.length; i++) {
-            int cur = map.get(callings[i]);
 
-            map.put(callings[i], cur - 1);
-            map.put(players[cur - 1], cur);
+        return list;
 
-            players[cur] = players[cur - 1];
-            players[cur - 1] = callings[i];
-        }
-
-        return players;
     }
-
 }
