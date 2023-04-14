@@ -1,22 +1,20 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 class Solution {
-    public List<Long> solution(int n, long left, long right) {
-
-        List<Long> list = new ArrayList<>();
-
-        for (long i = left; i < right+1; i++) {
-
-            list.add(Math.max(i / n, i % n) + 1);
+    public int[][] solution(int[][] arr1, int[][] arr2) {
+        int[][] answer = new int[arr1.length][arr2[0].length];
 
 
+
+        for (int i = 0; i < arr1.length; i++) {
+
+            for (int j = 0; j < arr2[0].length; i++) {
+
+                for (int k = 0; k < arr1[0].length; k++) {
+                    answer[i][j] += arr1[i][k] * arr2[k][j];
+                }
+            }
         }
 
 
-        return list;
-
+        return answer;
     }
 }
