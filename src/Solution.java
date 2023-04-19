@@ -1,19 +1,22 @@
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 class Solution {
-    public int[][] solution(int[][] arr1, int[][] arr2) {
-        int[][] answer = new int[arr1.length][arr2[0].length];
+    public int solution(String[][] clothes) {
+        int answer = 1;
 
 
+        Map<String, Integer> map = new HashMap<>();
 
-        for (int i = 0; i < arr1.length; i++) {
-
-            for (int j = 0; j < arr2[0].length; i++) {
-
-                for (int k = 0; k < arr1[0].length; k++) {
-                    answer[i][j] += arr1[i][k] * arr2[k][j];
-                }
-            }
+        for (int i = 0; i < clothes.length; i++) {
+            map.put(clothes[i][1], map.getOrDefault(clothes[i][1], 0) + 1);
         }
 
+        for (String s : map.keySet()) {
+            answer *= (map.get(s) + 1);
+        }
+        answer -= 1;
 
         return answer;
     }
