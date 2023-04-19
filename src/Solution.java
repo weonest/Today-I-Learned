@@ -1,22 +1,30 @@
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.regex.Pattern;
 
 class Solution {
-    public int solution(String[][] clothes) {
-        int answer = 1;
+    public int[] solution(String s) {
+        int[] answer;
+        Map<Integer, Integer> map = new HashMap<>();
 
 
-        Map<String, Integer> map = new HashMap<>();
+        s = s.replaceAll("[\\{\\}]", "");
 
-        for (int i = 0; i < clothes.length; i++) {
-            map.put(clothes[i][1], map.getOrDefault(clothes[i][1], 0) + 1);
+
+        for (String val : s.split(",")) {
+            int tmp = Integer.parseInt(val);
+            map.put(tmp, map.getOrDefault(tmp, 0) + 1);
         }
 
-        for (String s : map.keySet()) {
-            answer *= (map.get(s) + 1);
+        int size = map.size();
+        answer = new int[size];
+
+        for (Integer i : map.keySet()) {
+            answer[size - map.get(i)] = i;
         }
-        answer -= 1;
+
+        System.out.println("map = " + map);
+
+
 
         return answer;
     }
