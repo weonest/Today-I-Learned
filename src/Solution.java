@@ -1,27 +1,25 @@
-import java.util.*;
-
 class Solution {
-    public List<Integer> solution (int[] progresses, int[] speeds) {
-        List<Integer> answer = new ArrayList<>();
-        Queue<Integer> que = new LinkedList<>();
+    public int[] solution(int[] prices) {
+        int[] answer = new int[prices.length];
 
+        for (int i = 0; i < prices.length; i++) {
+            int cur = prices[i];
 
-        for (int i = 0; i < progresses.length; i++) {
-            que.add((int) (Math.ceil((100.0 - progresses[i]) / speeds[i]))); //소수점을 정수로 반올림
-        }
-        System.out.println("que = " + que);
-
-        while (!que.isEmpty()) {
-            int day = que.poll();
-            int cnt = 1;
-
-            while (!que.isEmpty() && day >= que.peek()) {
-                cnt++;
-                que.poll();
+            if (i == prices.length - 1) {
+                answer[i] = 0;
+                break;
             }
-            answer.add(cnt);
-        }
+            for (int j = i+1; j < prices.length; j++) {
+                int compare = prices[j];
 
+                if (cur <= compare) {
+                    answer[i]++;
+                } else {
+                    answer[i]++;
+                    break;
+                }
+            }
+        }
 
         return answer;
     }
