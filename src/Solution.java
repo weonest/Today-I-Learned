@@ -1,53 +1,28 @@
+import java.util.*;
+
 class Solution {
-    public String solution(String new_id) {
-        String answer = "";
+    public List<Integer> solution (int[] progresses, int[] speeds) {
+        List<Integer> answer = new ArrayList<>();
+        Queue<Integer> que = new LinkedList<>();
 
-        String s = new_id.toLowerCase();
-        s = s.replaceAll("[^a-z-_.0-9]", "");
 
-        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < progresses.length; i++) {
+            que.add((int) (Math.ceil((100.0 - progresses[i]) / speeds[i]))); //소수점을 정수로 반올림
+        }
+        System.out.println("que = " + que);
 
-        int cnt = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char cur = s.charAt(i);
-            if (cur == '.') {
+        while (!que.isEmpty()) {
+            int day = que.poll();
+            int cnt = 1;
+
+            while (!que.isEmpty() && day >= que.peek()) {
                 cnt++;
-                if (cnt > 1) {
-                    continue;
-                } else {
-                    sb.append(cur);
-                }
-            } else {
-                sb.append(cur);
-                cnt = 0;
+                que.poll();
             }
+            answer.add(cnt);
         }
 
 
-        if (sb.charAt(0) == '.') {
-            sb.deleteCharAt(0);
-        }
-
-        if (sb.length() > 0) {
-            if (sb.charAt(sb.length() - 1) == '.') {
-                sb.setLength(sb.length() - 1);
-            }
-        }
-
-        if (sb.length() == 0) {
-            sb.append("a");
-        }
-
-        if (sb.length() > 15) {
-            sb.setLength(15);
-            if (sb.charAt(sb.length() - 1) == '.') {
-                sb.setLength(sb.length() - 1);
-            }
-        }
-
-        if (sb.length() <= 2) {
-            while (sb.length() < 3) sb.append(sb.charAt(sb.length() - 1));
-        }
-        return answer = sb.toString();
+        return answer;
     }
 }
