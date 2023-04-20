@@ -1,30 +1,50 @@
 import java.util.*;
-import java.util.regex.Pattern;
 
 class Solution {
-    public int[] solution(String s) {
-        int[] answer;
-        Map<Integer, Integer> map = new HashMap<>();
+    class Document {
+        int index;
+        int priority;
 
+        public Document(int index, int priority) {
+            this.index = index;
+            this.priority = priority;
+        }
+    }
+    public int solution(int[] priorities, int location) {
+        int answer = 0;
 
-        s = s.replaceAll("[\\{\\}]", "");
+        Queue<Document> que = new LinkedList<>();
 
-
-        for (String val : s.split(",")) {
-            int tmp = Integer.parseInt(val);
-            map.put(tmp, map.getOrDefault(tmp, 0) + 1);
+        int idx = 0;
+        for (int i : priorities) {
+            que.add(new Document(idx, i));
+            idx++;
         }
 
-        int size = map.size();
-        answer = new int[size];
+        while (!que.isEmpty()) {
 
-        for (Integer i : map.keySet()) {
-            answer[size - map.get(i)] = i;
+            int cur = que.peek().priority;
+
+            boolean flag = false;
+
+            for (Document document : que) {
+                if (document.priority > cur) {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (flag) {
+                Document doc = que.poll();
+                que.add(doc);
+            } else {
+                answer++;
+                Document doc = que.poll();
+                if (doc.index == location) {
+                    return answer;
+                }
+            }
         }
-
-        System.out.println("map = " + map);
-
-
 
         return answer;
     }
