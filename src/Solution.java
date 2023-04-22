@@ -1,31 +1,44 @@
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
-    int answer = 0;
 
-    public int solution(int n, int k) {
-        String str = "";
+    public List<Integer> solution(String msg) {
+        List<Integer> answer = new ArrayList<>();
 
-        while (n > 0) {
-            str = String.valueOf(n % k) + str;
-            n /= k;
+        Map<String, Integer> map = new HashMap<>();
+
+        int init = 65;
+
+        for (int i = 0; i < 26; i++) {
+            map.put(String.valueOf((char) init), i + 1);
+            init++;
         }
-        String[] nums = str.split("0");
 
-        for (String s : nums) {
-            if (s.equals("")) continue;
-            if (checkPrime(Long.valueOf(s))) answer++;
-        }
+        lzw(map, answer, msg);
+
 
         return answer;
     }
 
-    public boolean checkPrime(long s) {
-        if (s == 1) return false;
+    public void lzw(Map<String, Integer> map, List<Integer> list, String msg) {
 
-        for (int i = 2; i <= (int) Math.sqrt(s); i++) {
-            if (s % i == 0) return false;
+        for (int i = 0; i < msg.length(); i++) {
+            String cur = msg.substring(0, i + 1);
+
+            if (!map.containsKey(cur)) {
+                map.put(cur, map.size() + 1);
+                list.add(map.get(msg.substring(0, i)));
+                lzw(map, list, msg.substring(i));
+                break; // 한 번만 확인하면 끝이기 때문
+            } else if (i + 1 == msg.length()) {
+                list.add(map.get(cur));
+            }
         }
-        return true;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        sol.solution("KAKAO");
     }
 }
