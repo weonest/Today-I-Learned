@@ -1,22 +1,31 @@
 import java.util.Arrays;
 
 class Solution {
-    public boolean solution(String[] phone_book) {
-        boolean answer = true;
-        Arrays.sort(phone_book);
+    int answer = 0;
 
+    public int solution(int n, int k) {
+        String str = "";
 
-        for (int i = 0; i < phone_book.length - 1; i++) {
-            String cur = phone_book[i];
-            String nex = phone_book[i + 1];
-
-            if (cur.length() > nex.length()) {
-                continue;
-            } else if (nex.substring(0, cur.length()).equals(cur)) {
-                answer = false;
-                return answer;
-            }
+        while (n > 0) {
+            str = String.valueOf(n % k) + str;
+            n /= k;
         }
+        String[] nums = str.split("0");
+
+        for (String s : nums) {
+            if (s.equals("")) continue;
+            if (checkPrime(Long.valueOf(s))) answer++;
+        }
+
         return answer;
+    }
+
+    public boolean checkPrime(long s) {
+        if (s == 1) return false;
+
+        for (int i = 2; i <= (int) Math.sqrt(s); i++) {
+            if (s % i == 0) return false;
+        }
+        return true;
     }
 }
