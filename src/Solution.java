@@ -1,33 +1,38 @@
+
 import java.util.Arrays;
+import java.util.Comparator;
 
 class Solution {
-        int[] answer;
-    public int[] solution(int[] array, int[][] commands) {
 
-        answer = new int[commands.length];
+    public String solution(int[] numbers) {
+        String answer = "";
 
-        for (int i = 0; i < commands.length; i++) {
-            cutArray(array, commands[i], i);
+        String[] arr = Arrays.stream(numbers).mapToObj(String::valueOf).toArray(String[]::new);
+
+        Arrays.sort(arr, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return (o2 + o1).compareTo(o1 + o2);
+            }
+        });
+
+        if (arr[0].equals("0")) {
+            return "0";
+        }
+
+        for (String s : arr) {
+            answer += s;
         }
 
         return answer;
+
     }
 
-    public void cutArray(int[] array, int[] arr, int n) {
 
-        int start = arr[0] -1;
-        int end = arr[1] - 1;
-        int target = arr[2] - 1;
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] numbers = {6, 2 , 10};
 
-        int[] tmp = new int[end - start + 1];
-
-        int idx = 0;
-        for (int i = start; i <= end; i++) {
-            tmp[idx] = array[i];
-            idx++;
-        }
-        Arrays.sort(tmp);
-
-        answer[n] = tmp[target];
+        sol.solution(numbers);
     }
 }
