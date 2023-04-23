@@ -1,28 +1,33 @@
-import java.util.*;
+import java.util.Arrays;
 
 class Solution {
-    public int solution(int[] scoville, int K) {
-        int answer = 0;
+        int[] answer;
+    public int[] solution(int[] array, int[][] commands) {
 
-        PriorityQueue<Long> pq = new PriorityQueue<>();
+        answer = new int[commands.length];
 
-        for (long i : scoville) {
-            pq.offer(i);
+        for (int i = 0; i < commands.length; i++) {
+            cutArray(array, commands[i], i);
         }
-        long min = pq.peek();
-        while (K > min && pq.size() > 1) {
-            answer++;
-
-            long least = pq.poll();
-            long less = pq.poll();
-            long hotter = least + (less * 2);
-            pq.offer(hotter);
-
-            min = pq.peek();
-        }
-            if (min < K) return -1;
-
 
         return answer;
+    }
+
+    public void cutArray(int[] array, int[] arr, int n) {
+
+        int start = arr[0] -1;
+        int end = arr[1] - 1;
+        int target = arr[2] - 1;
+
+        int[] tmp = new int[end - start + 1];
+
+        int idx = 0;
+        for (int i = start; i <= end; i++) {
+            tmp[idx] = array[i];
+            idx++;
+        }
+        Arrays.sort(tmp);
+
+        answer[n] = tmp[target];
     }
 }

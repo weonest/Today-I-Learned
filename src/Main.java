@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
+import java.util.*;
+import java.util.stream.*;
 
 public class Main {
 
@@ -13,11 +14,19 @@ public class Main {
 
         int N = Integer.parseInt(br.readLine());
 
+        int[] tmp = {3, 4, 5, 1, 2, 8, 3, 21};
+
         Stack<Integer> stack = new Stack<>();
+
+        List<Integer> list = Arrays.stream(tmp).boxed().collect(Collectors.toList());
+
+        list.sort(Comparator.naturalOrder());
+        System.out.println("list = " + list);
+
 
         for (int i = 0; i < N; i++) {
             String[] command = br.readLine().split(" ");
-
+            
 
             switch (command[0]) {
                 case "push":
