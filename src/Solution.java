@@ -1,38 +1,30 @@
-
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 class Solution {
+    public int solution(int[][] board, int[] moves) {
+        int answer = 0;
 
-    public String solution(int[] numbers) {
-        String answer = "";
+        Stack<Integer> stack = new Stack<>();
 
-        String[] arr = Arrays.stream(numbers).mapToObj(String::valueOf).toArray(String[]::new);
+        for (int i = 0; i < moves.length; i++) {
 
-        Arrays.sort(arr, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return (o2 + o1).compareTo(o1 + o2);
+            for (int j = 0; j < board[0].length; j++) {
+                int target = board[j][moves[i] - 1];
+
+                if (target > 0) {
+                    board[j][moves[i] - 1] = 0;
+                    if (!stack.isEmpty() && stack.peek() == target) {
+                        answer += 2;
+                        stack.pop();
+                    } else {
+                        stack.push(target);
+                    }
+                    break;
+                }
             }
-        });
 
-        if (arr[0].equals("0")) {
-            return "0";
-        }
-
-        for (String s : arr) {
-            answer += s;
         }
 
         return answer;
-
-    }
-
-
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        int[] numbers = {6, 2 , 10};
-
-        sol.solution(numbers);
     }
 }
