@@ -3,17 +3,17 @@ import java.util.*;
 
 public class Main {
 
-    static int Max = 25 + 5;
+    static int Max = 55;
     static boolean[][] graph;
     static boolean[][] visited;
     static int countPerDan;
+    static int count;
 
     static int dx[] = {1, -1, 0, 0};
     static int dy[] = {0, 0, 1, -1};
 
     static void dfs(int x, int y) {
         visited[x][y] = true;
-        countPerDan++;
 
         for (int i = 0; i < 4; i++) {
             int nX = x + dx[i];
@@ -30,35 +30,35 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());
+        int T = Integer.parseInt(st.nextToken());
 
-        graph = new boolean[Max][Max];
-        visited = new boolean[Max][Max];
+        for (int l = 0; l < T; l++) {
+            count = 0;
+            StringTokenizer stt = new StringTokenizer(br.readLine(), " ");
+            int M = Integer.parseInt(stt.nextToken());
+            int N = Integer.parseInt(stt.nextToken());
+            graph = new boolean[M+5][N+5];
+            visited = new boolean[M+5][N+5];
 
-        for (int i = 1; i <= N; i++) {
-            String s = br.readLine();
-            for (int j = 1; j <= N; j++) {
-                graph[i][j] = s.charAt(j - 1) == '1'; // true가 담기는 곳이 아파트가 있는 곳
+            int K = Integer.parseInt(stt.nextToken());
+            for (int i = 0; i < K; i++) {
+                st = new StringTokenizer(br.readLine(), " ");
+                int p1 = Integer.parseInt(st.nextToken());
+                int p2 = Integer.parseInt(st.nextToken());
+                graph[p1][p2] = true;
             }
-        }
 
-        List<Integer> countList = new ArrayList<>(); // 각 단지가 몇개의 아파트로 구성
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= N; j++) {
-                if (graph[i][j] && !visited[i][j]) {
-                    countPerDan = 0;
-                    dfs(i, j);
-                    countList.add(countPerDan);
+            for (int j = 1; j <= M; j++) {
+                for (int k = 1; k <= N; k++) {
+                    if (graph[j][k] && !visited[j][k]) {
+                        dfs(j, k);
+                        count++;
+                    }
                 }
             }
+            System.out.println(count);
         }
 
-        System.out.println(countList.size());
-        countList.sort(Comparator.naturalOrder());
-
-        for (int i : countList) {
-            System.out.println(i);
-        }
     }
 
 
