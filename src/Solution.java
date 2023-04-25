@@ -1,67 +1,94 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.text.*;
+import java.util.*;
 
 class Solution {
-    Position left;
-    Position right;
-    Position pos;
+    int basicTime;
+    int basicFee;
+    int perTime;
+    int perFee;
 
-    public String solution(int[] numbers, String hand) {
+    Map<String, Integer> logMap = new HashMap<>();
 
-        StringBuilder answer = new StringBuilder();
+    public int[] solution(int[] fees, String[] records) {
 
-        left = new Position(3, 0);
-        right = new Position(3, 2);
+        basicTime = fees[0];
+        basicFee = fees[1];
+        perTime = fees[2];
+        perFee = fees[3];
 
-        for (int i : numbers) {
-            pos = new Position((i - 1) / 3, (i - 1) % 3);
-            if (i == 0) pos = new Position(3, 1);
 
-            String finger = pos.getFinger(hand);
+        Map<String, String> map = new HashMap<>();
+        Map<String, Integer> ans = new HashMap<>();
+        int min = 0;
 
-            answer.append(finger);
+        for (int i = 0; i < records.length; i++) {
+            String time = records[i].split(" ")[0];
+            String car = records[i].split(" ")[1];
+            String log = records[i].split(" ")[2];
 
-            if (finger.equals("L")) {
-                left = pos;
+            if (log.equals("IN")) {
+                map.put(car, time);
             } else {
-                right = pos;
+                min = getUsedTime(time, map.get(car));
+                ans.put(car, ans.getOrDefault(car, 0) + min);
+                map.remove(car);
+            }
+        }
+        if (!map.isEmpty()) {
+            for (String car : map.keySet()) {
+                min = getUsedTime(map.get(car), "23:59");
+                ans.put(car, ans.getOrDefault(car, 0) + min);
             }
         }
 
-        return answer.toString();
+        return getBill(ans);
     }
 
-    class Position {
-        int row;
-        int col;
+    public int getUsedTime(String a, String b) {
+        int result = 0;
+        try {
 
-        public Position(int row, int col) {
-            this.row = row;
-            this.col = col;
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+            Date date1 = sdf.parse(a);
+            Date date2 = sdf.parse(b);
+
+            // Date -> 밀리세컨즈
+            long timeMil1 = date1.getTime();
+            long timeMil2 = date2.getTime();
+
+            // 비교
+            long diff = timeMil2 - timeMil1;
+
+            long diffMin = Math.abs(diff / (1000 * 60));
+
+            result = (int) diffMin;
+
+            return result;
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        return result;
+    }
 
-        public String getFinger(String hand) {
-            String finger = hand.equals("right") ? "R" : "L";
 
-            if (this.col == 0) finger = "L";
-            else if (this.col == 2) finger = "R";
-            else {
-                int leftGap = left.getGap(this);
-                int rightGap = right.getGap(this);
+    public int[] getBill(Map<String, Integer> ans) {
+        List<Integer> list = new ArrayList<>();
 
-                if (leftGap < rightGap) {
-                    finger = "L";
-                } else if (leftGap > rightGap) {
-                    finger = "R";
-                }
+        List<String> keyList = new ArrayList<>(ans.keySet());
+        keyList.sort((s1, s2) -> s1.compareTo(s2));
+
+        for (String car : keyList) {
+            int min = ans.get(car);
+            int bill = 0;
+
+            if (min <= basicTime) {
+                bill += basicFee;
+            } else {
+                bill += (((int)Math.ceil(((double)min - basicTime) / perTime)) * perFee) + basicFee;
             }
-            return finger;
+            list.add(bill);
         }
-
-        public int getGap(Position pos) {
-            return Math.abs(this.row - pos.row) + Math.abs(this.col - pos.col);
-        }
-
+        return list.stream().mapToInt(Integer::intValue).toArray();
     }
-
 }
