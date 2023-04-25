@@ -1,32 +1,31 @@
+import java.util.Arrays;
+import java.util.List;
 
 class Solution {
-    int solution(int[][] land) {
+    public int solution(String skill, String[] skill_trees) {
+
+        if (skill.length() == 1) return skill_trees.length;
+
         int answer = 0;
 
+        String pt = "[^" + skill + "]";
 
-        int[][] d = new int[land.length][land[0].length];
+        for (String s : skill_trees) {
+            s = s.replaceAll(pt, "");
 
-        for (int i = 0; i < 4; i++) {
+            System.out.println("s = " + s);
 
-            d[0][i] = land[0][i];
-
-
-        }
-        for (int i = 1; i < land.length; i++) {
-            for (int j = 0; j < land[i].length; j++) {
-                for (int k = 0; k < land[i].length; k++) {
-                    if (j==k) continue;
-
-                    d[i][j] = Math.max(d[i][j], d[i - 1][k] + land[i][j]);
-                }
-
+            if (s.equals("")) { // 없으면 다 배울 수 있으니까
+                answer++;
+                continue;
             }
+            for (int i = 1; i <= skill.length(); i++) {
+                if (skill.substring(0, i).equals(s)) {
+                    answer++;
+                }
+            }
+
         }
-        int max = 0;
-        for (int i = 0; i < d[0].length; i++) {
-            max = Math.max(max, d[d.length - 1][i]);
-        }
-        answer = max;
 
 
         return answer;
