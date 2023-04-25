@@ -2,121 +2,86 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.stream.*;
 
 public class Main {
 
+    static StringBuilder sb = new StringBuilder();
+    static boolean[] visited;
+    static int[][] arr;
+
+    static int node, line, start;
+
+    static Queue<Integer> que = new LinkedList<>();
+
+    class Node {
+        int x;
+        int y;
+
+        public Node(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         int sum = 0;
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int[] tmp = {3, 4, 5, 1, 2, 8, 3, 21};
+        node = Integer.parseInt(st.nextToken());
+        line = Integer.parseInt(st.nextToken());
+        start = Integer.parseInt(st.nextToken());
 
-        Stack<Integer> stack = new Stack<>();
+        arr = new int[node + 1][node + 1];
+        visited = new boolean[node + 1];
 
-        List<Integer> list = Arrays.stream(tmp).boxed().collect(Collectors.toList());
+        for (int i = 0; i < line; i++) {
+            StringTokenizer str = new StringTokenizer(br.readLine());
 
-        list.sort(Comparator.naturalOrder());
-        System.out.println("list = " + list);
+            int a = Integer.parseInt(str.nextToken());
+            int b = Integer.parseInt(str.nextToken());
 
+            arr[a][b] = arr[b][a] = 1;
+        }
 
-        for (int i = 0; i < N; i++) {
-            String[] command = br.readLine().split(" ");
-            
+        dfs(start);
+        sb.append("\n");
 
-            switch (command[0]) {
-                case "push":
-                    push(stack, Integer.parseInt(command[1]));
-                    break;
-                case "pop":
-                    System.out.println(pop(stack));
-                    break;
-                case "size":
-                    System.out.println(size(stack));
-                    break;
-                case "empty":
-                    System.out.println(empty(stack));
-                    break;
-                case "top":
-                    System.out.println(top(stack));
-                    break;
+        visited = new boolean[node + 1];
+        bfs(start);
+
+        System.out.println(sb);
+    }
+
+    public static void dfs(int start) {
+        visited[start] = true;
+        sb.append(start + " ");
+
+        for (int i = 0; i <= node; i++) {
+            if (arr[start][i] == 1 && !visited[i]) {
+                dfs(i);
             }
-
         }
     }
 
-    public static void push(Stack<Integer> stack, int n) {
-        stack.push(n);
-    }
+    public static void bfs(int start) {
+        que.add(start);
+        visited[start] = true;
 
-    public static int pop(Stack<Integer> stack) {
-        int n = -1;
-        if (!stack.isEmpty()) {
-            n = stack.pop();
+        while (!que.isEmpty()) {
+
+            start = que.poll();
+            sb.append(start + " ");
+
+            for (int i = 1; i <= node; i++) {
+                if (arr[start][i] == 1 && !visited[i]) {
+                    que.add(i);
+                    visited[i] = true;
+                }
+            }
         }
-        return n;
-    }
-
-    public static int size(Stack<Integer> stack) {
-        int n = 0;
-        if (!stack.isEmpty()) n = stack.size();
-        return n;
-    }
-
-    public static int empty(Stack<Integer> stack) {
-        int n = 0;
-        if (stack.isEmpty()) n = 1;
-        return n;
-    }
-
-    public static int top(Stack<Integer> stack) {
-        int n = -1;
-        if (!stack.isEmpty()) {
-            n = stack.peek();
-        }
-        return n;
     }
 }
-//public class Main {
-//	public static void main(String[] args) throws IOException {
-//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-//
-//		int n = Integer.parseInt(br.readLine());
-//
-//        // Stack 객체 생성.
-//		Stack<Integer> stack = new Stack<>();
-//
-//        // 동일.
-//		for(int i = 0;i<n;i++) {
-//			String cons = br.readLine();
-//
-//			if(cons.contains("push")) { // 동일.
-//				String spt[] = cons.split(" ");
-//				stack.push(Integer.parseInt(spt[1]));
-//			}else if(cons.contains("pop")) { // 동일.
-//				if(stack.empty()) bw.write(-1+"\n"); // 별도의 empty() 체크가 필요하다.
-//				else bw.write(stack.pop()+"\n");
-//			}else if(cons.contains("size")) { // 동일.
-//				bw.write(stack.size()+"\n");
-//			}else if(cons.contains("empty")) { // 동일.
-//				if(stack.empty()) bw.write(1+"\n"); // 별도의 empty() 체크가 필요하다.
-//				else bw.write(0+"\n");
-//			}else if(cons.contains("top")) { // 동일.
-//				if(stack.empty())bw.write(-1+"\n");	// 별도의 empty() 체크가 필요하다.
-//				else bw.write(stack.peek()+"\n");
-//			}
-//		}
-//
-//		bw.flush();
-//		bw.close();
-//		br.close();
-//
-//	}
-//
-//}
- 
+
