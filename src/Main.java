@@ -9,27 +9,25 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(st.nextToken());
-        int answer = N;
+        int answer = 0;
+        int[] arr = new int[N];
+
+        st = new StringTokenizer(br.readLine());
 
         for (int i = 0; i < N; i++) {
-            String str = br.readLine();
-            boolean visited[] = new boolean[26];
+            int num = Integer.parseInt(st.nextToken());
+            boolean isPrime = true;
+            if (num == 1) continue;
 
-            for (int j = 0; j < str.length() - 1; j++) {
-                int cur = str.charAt(j) - 'a';
-                int next = str.charAt(j+1) - 'a';
-
-                if (cur != next) {
-                    if (visited[next]) {
-                        answer--;
-                        break;
-                    }
+            for (int j = 2; j <= Math.sqrt(num); j++) {
+                if (num % j == 0) {
+                    isPrime = false;
+                    break;
                 }
-                visited[cur] = true;
-
             }
+            if (isPrime) answer++;
         }
         System.out.println(answer);
     }
-
 }
+
