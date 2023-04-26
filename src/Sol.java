@@ -1,45 +1,99 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
 public class Sol {
 
-    int answer = 0;
+    static int M, N, K;
 
-    int[] dx = {0, 0, -1, 1};
-    int[] dy = {1, -1, 0, 0};
+    static boolean[][] graph;
 
-    int[][] visited;
+    static int[] dx = {1, -1, 0, 0};
+    static int[] dy = {0, 0, 1, -1};
 
-    class Node {
+    static int count;
+
+    static class Node {
         int x;
         int y;
 
         public Node(int x, int y) {
             this.x = x;
             this.y = y;
-
         }
     }
-    public int solution(int[][] maps) {
 
-        visited = new int[maps.length][maps[0].length];
+    public static void main(String[] args) throws IOException {
 
-        dfs(maps, 0, 0);
-        answer = visited[maps.length - 1][maps[0].length-1];
-        return answer;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int T = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < T; i++) {
+            count = 0;
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            M = Integer.parseInt(st.nextToken());
+            N = Integer.parseInt(st.nextToken());
+
+            graph = new boolean[M + 2][N + 2];
+
+            K = Integer.parseInt(st.nextToken());
+            for (int j = 1; j <= K; j++) {
+                st = new StringTokenizer(br.readLine());
+                int p1 = Integer.parseInt(st.nextToken()) + 1;
+                int p2 = Integer.parseInt(st.nextToken()) + 1;
+                graph[p1][p2] = true;
+            }
+
+            for (int x = 1; x <= N; x++) {
+                for (int y = 1; y <= N; y++) {
+                    if (graph[y][x]) {
+//                        dfs(x, y);
+                        bfs(x, y);
+                        count++;
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+
+
     }
 
-
-
-    public void dfs(int[][] maps, int x, int y) {
-        visited[x][y] = 1;
+    public static void dfs(int x, int y) {
+        graph[y][x] = false;
 
         for (int i = 0; i < 4; i++) {
             int newX = x + dx[i];
             int newY = y + dy[i];
 
-//               if(newX < 0 || newX > maps[0].length - 1 || newY < 0 || newY > maps.length - 1) {
-            if (newX >= 0 && newY >= 0 && newX <= maps[0].length - 1 && newY <= maps.length - 1){
-                if (visited[newX][newY] == 0 && maps[newX][newY] == 1) {
-                    visited[newX][newY] = visited[x][y] + 1;
-                    dfs(maps, newX, newY);
+            if (graph[newY][newX]) {
+                dfs(newX, newY);
+
+            }
+        }
+    }
+
+    public static void bfs(int x, int y) {
+        graph[y][x] = false;
+        Queue<Node> que = new LinkedList<>();
+        Node node = new Node(x, y);
+        que.add(node);
+
+        while (!que.isEmpty()) {
+            x = que.peek().x;
+            y = que.peek().y;
+            graph[y][x] = false;
+
+            que.poll();
+
+            for (int i = 0; i < 4; i++) {
+                int newX = x + dx[i];
+                int newY = y + dy[i];
+
+                if (graph[newY][newX]) {
+                    que.add(new Node(newX, newY));
                 }
             }
         }
