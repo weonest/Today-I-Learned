@@ -1,26 +1,64 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Baek1012 {
 
     static int M, N, K;
     static int[][] cabbage;
-    static boolean[][] visit;
+    static boolean[][] visited;
     static int count;
     static int[] dx = { 0, -1, 0, 1 };
     static int[] dy = { 1, 0, -1, 0 };
 
+    static class Node {
+        int x;
+        int y;
+
+        public Node(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    static void bfs(int x, int y) {
+        Queue<Node> que = new LinkedList<>();
+        que.add(new Node(x, y));
+
+        while (!que.isEmpty()) {
+
+            x = que.peek().x;
+            y = que.peek().y;
+            visited[x][y] = true;
+            que.poll();
+
+            for (int i = 0; i < 4; i++) {
+                int newX = x + dx[i];
+                int newY = y + dy[i];
+
+                if (!visited[newX][newY] && cabbage[newX][newY] == 1) {
+                    que.add(new Node(newX, newY));
+                    visited[newX][newY] = true;
+                }
+            }
+        }
+
+
+        
+    }
+
     static void dfs(int x, int y) {
-        visit[x][y] = true;
+        visited[x][y] = true;
 
         for (int i = 0; i < 4; i++) {
-            int cx = x + dx[i];
-            int cy = y + dy[i];
+            int newX = x + dx[i];
+            int newY = y + dy[i];
 
-                if (!visit[cx][cy] && cabbage[cx][cy] == 1) {
-                    dfs(cx, cy);
+                if (!visited[newX][newY] && cabbage[newX][newY] == 1) {
+                    dfs(newX, newY);
                 }
 
         }
@@ -38,7 +76,7 @@ public class Baek1012 {
             M = Integer.parseInt(st.nextToken());
             N = Integer.parseInt(st.nextToken());
             cabbage = new int[M+5][N+5];
-            visit = new boolean[M+5][N+5];
+            visited = new boolean[M+5][N+5];
 
             K = Integer.parseInt(st.nextToken());
             for (int j = 1; j <= K; j++) {
@@ -50,8 +88,9 @@ public class Baek1012 {
 
             for (int x = 1; x <= M; x++) {
                 for (int y = 1; y <= N; y++) {
-                    if (cabbage[x][y] == 1 && !visit[x][y]) {
-                        dfs(x, y);
+                    if (cabbage[x][y] == 1 && !visited[x][y]) {
+//                        dfs(x, y);
+                        bfs(x, y);
                         count++;
                     }
                 }
