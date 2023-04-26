@@ -34,6 +34,8 @@ public class Baek2667 {
 
         for (int i = 1; i <= N; i++) {
             String s = br.readLine();
+            if (s.length() == 1) continue;
+
             for (int j = 1; j <= N; j++) {
                 graph[i][j] = s.charAt(j - 1) == '1';
             }

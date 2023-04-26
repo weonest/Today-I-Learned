@@ -1,34 +1,42 @@
-import java.util.*;
-
 class Solution {
-    char[] words = {'A', 'E', 'I', 'O', 'U'};
-    public int solution(String word) {
-        int answer = 0;
 
+    boolean[][] graph;
 
+    public int solution(int n, int[][] wires) {
+        int answer = -1;
 
-        List<String> list = new ArrayList<>();
+        graph = new boolean[n][n];
 
-        for(int i = 0; i < words.length; i++){
-            dfs(list, String.valueOf(words[i]));
+        for (int i = 0; i < wires.length; i++) {
+            int a = wires[i][0];
+            int b = wires[i][1];
+
+            graph[a][b] = graph[b][a] = true;
         }
 
-        for(String s : list) {
-            if(list.contains(word)){
-                answer = list.indexOf(word) + 1;
+        for (int j = 0; j < wires.length; j++) {
+            for (int x = 0; x < wires.length; x++) {
+                for (int y = 0; y < wires[0].length; y++) {
+                    if (j == x || j == y) continue;
+                    if (graph[y][x]) {
+                        dfs(x, y);
+                    }
+                }
             }
         }
 
         return answer;
     }
 
-    void dfs(List<String> list, String s) {
-        if (s.length() == words.length + 1) return;
+    void dfs(int x, int y) {
+        graph[x][y] = false;
 
-        if (!list.contains(s)) list.add(s);
 
-        for(int i = 0; i < words.length; i++){
-            dfs(list, s + String.valueOf(words[i]));
+        for (int i = 0; i < graph.length; i++) {
+            for (int j = 0; j < graph[0].length; j++) {
+
+            }
         }
     }
+
 }
