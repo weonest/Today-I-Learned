@@ -3,31 +3,50 @@ import java.util.*;
 
 public class Main {
 
+    static int N;
+    static int M;
+    static int max;
+    static int[] arr;
+    static int answer;
+
+
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = Integer.parseInt(st.nextToken());
-        int answer = 0;
-        int[] arr = new int[N];
+        N = Integer.parseInt(st.nextToken());
+        max = 0;
+
+        M = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
 
-        for (int i = 0; i < N; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            boolean isPrime = true;
-            if (num == 1) continue;
+        arr = new int[N];
 
-            for (int j = 2; j <= Math.sqrt(num); j++) {
-                if (num % j == 0) {
-                    isPrime = false;
-                    break;
-                }
-            }
-            if (isPrime) answer++;
+        for (int i = 0; i < N; i++) {
+            int cur = Integer.parseInt(st.nextToken());
+            arr[i] = cur;
         }
+        dfs(0, 0, 0);
+
         System.out.println(answer);
+
+    }
+
+    static void dfs(int depth, int start, int sum) {
+        if (depth == 3) {
+            if (sum <= M) {
+                answer = Math.max(answer, sum);
+            }
+            return;
+        }
+
+
+
+        for (int i = start; i < N; i++) {
+            dfs(depth + 1, i+1, sum + arr[i]);
+        }
     }
 }
 
