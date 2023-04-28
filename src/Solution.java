@@ -1,42 +1,48 @@
 class Solution {
+    int answer = 0;
 
-    boolean[][] graph;
+//    public long solution(int n) {
+//
+//
+//        dfs(n,0);
+//
+//        answer %= 1234567;
+//        return answer;
+//    }
+//
+//    public void dfs(int n, int tmp) {
+//        if (tmp >= n) {
+//            if (tmp == n) {
+//                answer++;
+//            }
+//            return;
+//        }
+//
+//        dfs(n, tmp + 1);
+//        dfs(n, tmp + 2);
+//    }
 
-    public int solution(int n, int[][] wires) {
-        int answer = -1;
+    /**
+     * 위의 재귀로 푸는 식은 정답을 구할 순 있지만, 테스트 케이스에 따라 시간 초과
+     *
+     * 마지막에 1칸을 뛰어 도착하는 경우, 그 앞칸을 밟고 1칸을 뛴 경우이므로, dp[i-1] 이다.
+     *
+     * 마지막에 2칸을 뛰어 도착하는 경우, 그 앞앞칸을 밟고 2칸을 뛴 경우이므로, dp[i-2]이다.
+     *
+     * 따라서 점화식은 다음과 같다.
+     *
+     * dp[i] = dp[i-2] + dp[i-1]
+     */
+    public long solution(int n) {
+        long arr[] = new long[2001];
+        arr[1] = 1;
+        arr[2] = 2;
 
-        graph = new boolean[n][n];
-
-        for (int i = 0; i < wires.length; i++) {
-            int a = wires[i][0];
-            int b = wires[i][1];
-
-            graph[a][b] = graph[b][a] = true;
+        for (int i = 3; i < 2001; i++) {
+            arr[i] = (arr[i-1]+arr[i-2])%1234567;
         }
-
-        for (int j = 0; j < wires.length; j++) {
-            for (int x = 0; x < wires.length; x++) {
-                for (int y = 0; y < wires[0].length; y++) {
-                    if (j == x || j == y) continue;
-                    if (graph[y][x]) {
-                        dfs(x, y);
-                    }
-                }
-            }
-        }
-
-        return answer;
+        return arr[n];
     }
 
-    void dfs(int x, int y) {
-        graph[x][y] = false;
-
-
-        for (int i = 0; i < graph.length; i++) {
-            for (int j = 0; j < graph[0].length; j++) {
-
-            }
-        }
-    }
 
 }
