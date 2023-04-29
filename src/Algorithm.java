@@ -2,9 +2,9 @@ public class Algorithm {
 
     static int[] out;
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4};
-        int r = 3;
-        out = new int[4];
+        int[] arr = {1, 2, 3, 4,5,6};
+        int r = 6;
+        out = new int[r];
         System.out.println(" per ");
         permutation(arr, new int[r], new boolean[arr.length], 0, r);
         System.out.println();
