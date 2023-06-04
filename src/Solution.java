@@ -1,57 +1,52 @@
-import java.util.*;
 
-/*
-그냥 3차원 배열 선언해서 to -> from 각각 다른 방향으로 true 표시해주기 
-*/
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 class Solution {
-    public int solution(String dirs) {
-        int answer = 0;
-        int[] dx = {-1,0,0,1};
-        int[] dy = {0,-1,1,0};
+    
+    // 문제에서는 상자들과 섞이지 않도록 따로 둔다고 하는데
+    // 배열에서 아예 없애버리면 인덱스가 맞지 않기 때문에 방문 처리를 해야함
 
-        boolean [][][] visited = new boolean[11][11][4];
+    boolean[] visited;
+    int cnt = 0;
 
-        int x = 5;
-        int y = 5;
+    public int solution(int[] cards) {
 
-        for(int i = 0; i < dirs.length(); i++){
-            char in = dirs.charAt(i);
-            int dir = 0;
+        visited = new boolean[cards.length];
 
-            switch(in){
-                case 'L':
-                    dir = 0;
-                    break;
-                case 'U':
-                    dir = 1;
-                    break;
-                case 'D':
-                    dir = 2;
-                    break;
-                case 'R':
-                    dir = 3;
-                    break;
-                default:
-                    break;
-            }
+        List<Integer> cntList = new ArrayList<>();
 
-            int newX = x + dx[dir];
-            int newY = y + dy[dir];
-
-            if(newX<0||newX >=11||newY<0||newY>=11)continue;
-
-            //이 방향으로 들어온 적이 없다면 
-            if (!visited[newX][newY][3-dir]&&!visited[x][y][dir]){
-                answer++;
-                visited[newX][newY][3-dir] = true;
-                visited[x][y][dir] = true;
-            }
-
-            x = newX;
-            y = newY;
+        for (int i = 0; i < cards.length; i++) {
+            if (visited[i]) continue; // 첫 번째 카드를 뽑는다. 방문했다면 다음 카드가 첫 번재 카드
+            cnt = 1; // 위 조건에서 유효한 카드만을 뽑기 때문에 cnt = 1로 설정
+            visited[i] = true;
+            recursive(cards, cards[i] - 1);
+            cntList.add(cnt);
         }
+        System.out.println("cntList = " + cntList);
 
-        return answer;
+        cntList.sort(Comparator.reverseOrder());
+
+        if (cntList.size() < 2) {
+            return 0;
+        } else {
+            return cntList.get(0) * cntList.get(1);
+        }
+    }
+
+    public void recursive(int[] cards, int idx) {
+        if (visited[idx]) return;
+
+        visited[idx] = true;
+        cnt++;
+        recursive(cards, cards[idx]-1);
+    }
+
+    public static void main(String[] args) {
+        int[] ex = {2,3,1,4,5,6};
+        Solution sol = new Solution();
+        sol.solution(ex);
     }
 }
