@@ -6,10 +6,10 @@ import java.util.*;
 
 // 그림 문제
 public class Baek2178 {
-    static int Max = 500 + 2;
+    static int Max = 100 + 2;
 
     static int[][] graph;
-    static int[][] ans;
+    static int[][] answer;
 
     static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, 1, -1};
@@ -35,11 +35,7 @@ public class Baek2178 {
         M = Integer.parseInt(st.nextToken());
 
         graph = new int[Max][Max];
-        ans = new int[Max][Max];
-        for (int a[] : ans) {
-            Arrays.fill(a, 1);
-        }
-
+        answer = new int[Max][Max];
 
         for (int i = 1; i <= N; i++) {
             String[] s = br.readLine().split("");
@@ -56,6 +52,7 @@ public class Baek2178 {
                 }
             }
         }
+        System.out.println(answer[N][M] + 1);
     }
 
 
@@ -74,12 +71,11 @@ public class Baek2178 {
                 int newX = x + dx[i];
                 int newY = y + dy[i];
 
-                if (graph[newY][newX] > 0) {
+                if (graph[newY][newX] > 0 && answer[newY][newX] == 0) {
                     que.add(new Node(newX, newY));
-                    ans[newY][newX] = graph[y][x] + 1;
+                    answer[newY][newX] = answer[y][x] + 1;
                 }
             }
         }
-        System.out.println(ans[M][N]);
     }
 }
