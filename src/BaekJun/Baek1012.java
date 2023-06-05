@@ -1,8 +1,12 @@
+package BaekJun;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+
+// 배추?
 public class Baek1012 {
 
     static int M, N, K;

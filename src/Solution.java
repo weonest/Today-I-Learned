@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 class Solution {
-    
+
     // 문제에서는 상자들과 섞이지 않도록 따로 둔다고 하는데
     // 배열에서 아예 없애버리면 인덱스가 맞지 않기 때문에 방문 처리를 해야함
 
@@ -41,11 +41,11 @@ class Solution {
 
         visited[idx] = true;
         cnt++;
-        recursive(cards, cards[idx]-1);
+        recursive(cards, cards[idx] - 1);
     }
 
     public static void main(String[] args) {
-        int[] ex = {2,3,1,4,5,6};
+        int[] ex = {2, 3, 1, 4, 5, 6};
         Solution sol = new Solution();
         sol.solution(ex);
     }

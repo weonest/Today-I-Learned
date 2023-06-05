@@ -1,18 +1,19 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+package BaekJun;
+
+import java.io.*;
 import java.util.*;
 
-public class Main {
-
-    static int M, N, K;
+// 아파트 단지
+public class Baek2667 {
+    static int Max = 25 + 2;
 
     static boolean[][] graph;
+    static boolean[][] visited;
 
     static int[] dx = {1, -1, 0, 0};
     static int[] dy = {0, 0, 1, -1};
 
-    static int count;
+    static int countDanJi;
 
     static class Node {
         int x;
@@ -26,43 +27,46 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int T = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        graph = new boolean[Max][Max];
+        visited = new boolean[Max][Max];
 
-        for (int i = 0; i < T; i++) {
-            count = 0;
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            M = Integer.parseInt(st.nextToken());
-            N = Integer.parseInt(st.nextToken());
 
-            graph = new boolean[N + 2][M + 2];
+        for (int i = 1; i <= N; i++) {
+            String s = br.readLine();
+            if (s.length() == 1) continue;
 
-            K = Integer.parseInt(st.nextToken());
-            for (int j = 1; j <= K; j++) {
-                st = new StringTokenizer(br.readLine());
-                int p1 = Integer.parseInt(st.nextToken()) + 1;
-                int p2 = Integer.parseInt(st.nextToken()) + 1;
-                graph[p2][p1] = true;
+            for (int j = 1; j <= N; j++) {
+                graph[i][j] = s.charAt(j - 1) == '1';
             }
-
-            for (int x = 1; x <= N; x++) {
-                for (int y = 1; y <= N; y++) {
-                    if (graph[y][x]) {
-                        count++;
-                        dfs(x, y);
-//                        bfs(x, y);
-                    }
-                }
-            }
-            System.out.println(count);
         }
 
+        List<Integer> list = new ArrayList<>();
+
+        for (int x = 1; x <= N; x++) {
+            for (int y = 1; y <= N; y++) {
+                if (graph[y][x]) {
+//                    countDanJi = 0; // dfs는 0시작
+                    countDanJi = 1;
+                    
+                    bfs(x, y);
+                    list.add(countDanJi);
+                }
+            }
+        }
+        System.out.println(list.size());
+        list.sort(Comparator.naturalOrder());
+        for (int i : list) {
+            System.out.println(i);
+        }
     }
 
     public static void dfs(int x, int y) {
         graph[y][x] = false;
+        countDanJi++;
 
         for (int i = 0; i < 4; i++) {
             int newX = x + dx[i];
@@ -70,7 +74,6 @@ public class Main {
 
             if (graph[newY][newX]) {
                 dfs(newX, newY);
-
             }
         }
     }
@@ -82,10 +85,10 @@ public class Main {
         que.add(node);
 
         while (!que.isEmpty()) {
+
             x = que.peek().x;
             y = que.peek().y;
             graph[y][x] = false;
-
             que.poll();
 
             for (int i = 0; i < 4; i++) {
@@ -94,8 +97,9 @@ public class Main {
 
                 if (graph[newY][newX]) {
                     que.add(new Node(newX, newY));
-                    graph[newY][newX] = false;
-                }
+                    countDanJi++;
+                    graph[newY][newX]=false;
+                 }
             }
         }
     }
