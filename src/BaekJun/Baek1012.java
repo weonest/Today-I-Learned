@@ -62,7 +62,6 @@ public class Baek1012 {
             System.out.println(count);
         }
 
-
     }
 
     public static void dfs(int x, int y) {
@@ -74,27 +73,36 @@ public class Baek1012 {
 
             if (graph[newY][newX]) {
                 dfs(newX, newY);
-
             }
         }
     }
 
+
+    //                         1       1
     public static void bfs(int x, int y) {
+        // 1, 1 false로 처리 방문처리
         graph[y][x] = false;
         Queue<Node> que = new LinkedList<>();
+
+        //                   1   1
         Node node = new Node(x, y);
         que.add(node);
 
         while (!que.isEmpty()) {
+            // 1, 1
             x = que.peek().x;
             y = que.peek().y;
             graph[y][x] = false;
 
+
+            // que empty
             que.poll();
 
             for (int i = 0; i < 4; i++) {
                 int newX = x + dx[i];
                 int newY = y + dy[i];
+
+                // 1, 2
 
                 if (graph[newY][newX]) {
                     que.add(new Node(newX, newY));

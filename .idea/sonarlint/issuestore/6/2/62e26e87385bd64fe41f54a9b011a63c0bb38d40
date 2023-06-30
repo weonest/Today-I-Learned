@@ -1,0 +1,13 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(İ¸³ùÿÿÿÿ8Ş¦ªÌ‘1
+n
+java:S3008"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô« Ãúÿÿÿÿ8û¦ªÌ‘1
+n
+java:S3008"LRename this field "K" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô« Ãúÿÿÿÿ8û¦ªÌ‘1
+A
+java:S1659"Declare "K" on a separate line.(Ô« Ãúÿÿÿÿ8ü¦ªÌ‘1
+v
+java:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(Ø×»8ş¦ªÌ‘1
+8
+java:S3626?"Remove this redundant jump.(ÉŠ©ƒ8ò”µÌ‘1
+U	java:S106C"9Replace this use of System.out or System.err by a logger.(ô¤„å8„§ªÌ‘1

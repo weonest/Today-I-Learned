@@ -1,0 +1,9 @@
+
+k	java:S117!"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂšŸüÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Íúâ¥üÿÿÿÿ
+i
+java:S3008"NRename this field "Max" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ßÁäûÿÿÿÿ
+V	java:S1255"<This block of commented-out lines of code should be removed.(ÄÆõıÿÿÿÿ
+P	java:S1257"<This block of commented-out lines of code should be removed.(¾ÃÓ4
+S	java:S106<"9Replace this use of System.out or System.err by a logger.(İ˜½…ùÿÿÿÿ
+S	java:S106?"9Replace this use of System.out or System.err by a logger.(´‹¹öşÿÿÿÿ

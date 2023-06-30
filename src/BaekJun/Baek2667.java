@@ -49,10 +49,10 @@ public class Baek2667 {
         for (int x = 1; x <= N; x++) {
             for (int y = 1; y <= N; y++) {
                 if (graph[y][x]) {
-//                    countDanJi = 0; // dfs는 0시작
-                    countDanJi = 1;
+                    countDanJi = 0; // dfs는 0시작
+//                    countDanJi = 1;
                     
-                    bfs(x, y);
+//                    bfs(x, y);
                     list.add(countDanJi);
                 }
             }
@@ -102,5 +102,9 @@ public class Baek2667 {
                  }
             }
         }
+
+
     }
 }
+
+

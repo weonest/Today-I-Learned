@@ -1,0 +1,21 @@
+
+`	java:S112x"FDefine and throw a dedicated exception instead of using a generic one.(Œæè±ÿÿÿÿÿ
+s	java:S1354"YReduce the total number of break and continue statements in this loop to use at most one.(ªÅŠŸüÿÿÿÿ
+[
+java:S2184*"ECast one of the operands of this subtraction operation to a "double".(ìêôØ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Íúâ¥üÿÿÿÿ
+]
+java:S2259!"BA "NullPointerException" could be thrown; "seat" is nullable here.(¬Çñåıÿÿÿÿ
+g
+java:S3008
+"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü¼Ëıÿÿÿÿ
+<
+java:S1659
+"!Declare "sum" on a separate line.(ü¼Ëıÿÿÿÿ
+U
+java:S1659"?Declare "dx" and all following declarations on a separate line.(…³š¶
+N	java:S106t"9Replace this use of System.out or System.err by a logger.(‚¨Ö§
+o
+java:S1210›"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(¸Úı[
+Z
+java:S1659">Declare "y" and all following declarations on a separate line.(ŸÉÍ¥üÿÿÿÿ

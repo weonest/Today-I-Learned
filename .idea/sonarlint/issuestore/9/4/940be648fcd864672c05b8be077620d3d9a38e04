@@ -1,0 +1,13 @@
+
+k	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æÇóëûÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Íúâ¥üÿÿÿÿ
+a
+java:S3008"LRename this field "M" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼™˜\
+a
+java:S3008"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼™˜\
+a
+java:S3008"LRename this field "K" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼™˜\
+S
+java:S1659">Declare "N" and all following declarations on a separate line.(¼™˜\
+V	java:S1258"<This block of commented-out lines of code should be removed.(èƒï¨úÿÿÿÿ
+S	java:S106>"9Replace this use of System.out or System.err by a logger.(Ž³ð¸ûÿÿÿÿ
