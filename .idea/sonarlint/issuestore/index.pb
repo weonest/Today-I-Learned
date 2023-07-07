@@ -1,8 +1,4 @@
 
-O
-src/BaekJun/hash/Baek20166.java,1\b\1b1fb338014c7c19ce772de6230179fb9eb4d262
-T
-$src/BaekJun/TwoPointer/Baek1806.java,d\f\dfff117638e98e4246236e2eb3f07f9c8ef354ec
 I
 src/BaekJun/Baek1541.java,7\0\709d74b997016de0ecd075a5f73e0af89a5d92d6
 I
@@ -17,8 +13,6 @@ I
 src/BaekJun/Beak2493.java,e\c\ec49a32659097f8eb877cf9b2f489c3aeb4c42b6
 I
 src/BaekJun/Baek1026.java,5\a\5a85cd772d5e178d38c31c34302a584b7a0de176
-O
-src/BaekJun/garph/Baek1707.java,7\2\7239e78613a2ff93713c232ef3a5fcb6a95c17e6
 B
 src/pgs/Login.java,f\4\f4f3a749a93b4bbfc43fd135c27deb3417f203f3
 C
@@ -26,24 +20,12 @@ C
 B
 src/pgs/Kakao.java,9\f\9f1eb94dbee2325f45567b2342c5831e526cc391
 A
-src/pgs/User.java,a\2\a2489bb8ef7d8bc01a2e8649e5c4e71edc1e535d
-A
 src/pgs/Main.java,2\8\28c6114ac3b1ae61fe36aabcb1f88ca5cc0c00f2
-B
-src/pgs/Naver.java,d\a\dad1ef0f829cf3a093ad605b706e4caa2eb01e8f
-H
-src/Something/Alarm.java,4\1\41b7e156d5caff389ae2586b1471feda390a98f5
-K
-src/Something/AlarmSet.java,5\3\539be11f2c68ddbeff7fe8a83c05cdfccbdd5ffc
-J
-src/Something/Lottery.java,e\3\e3c68ed6a0bc8f8a3be720063bec525de38a38cc
-O
-src/BaekJun/garph/Baek2617.java,b\5\b5153b29d25f870cacc83367014b4a24c33d9ed8
 J
 src/BaekJun/hash/Main.java,c\7\c7ff114d50db9c0f2d23b26eea77e33fbb3153ab
-E
-src/BaekJun/Main.java,0\0\001f94c632fa62bff430ae9f3d6b42c3df82cbeb
-V
-&src/BaekJun/binarySearch/Baek7662.java,2\b\2bca31eec6dc54221f5f42f48583df68e226cfef
-V
-&src/BaekJun/binarySearch/Baek1202.java,6\2\62e26e87385bd64fe41f54a9b011a63c0bb38d40
+B
+src/pgs/Naver.java,d\a\dad1ef0f829cf3a093ad605b706e4caa2eb01e8f
+A
+src/pgs/User.java,a\2\a2489bb8ef7d8bc01a2e8649e5c4e71edc1e535d
+K
+src/Something/AlarmSet.java,5\3\539be11f2c68ddbeff7fe8a83c05cdfccbdd5ffc
