@@ -90,4 +90,5 @@ public class Baek1647 {
         if (x < y) parent[y] = x;
         else parent[x] = y;
     }
+
 }
