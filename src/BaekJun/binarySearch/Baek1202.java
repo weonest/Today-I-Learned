@@ -63,7 +63,6 @@ public class Baek1202 {
                 continue;
             }
         }
-
         System.out.println(answer);
     }
 }
