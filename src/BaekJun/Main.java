@@ -66,7 +66,6 @@ public class Main {
         students = new int[N * N];
         map = new int[N][N];
 
-
         for (int i = 0; i < N * N; i++) {
             st = new StringTokenizer(br.readLine());
             int student = Integer.parseInt(st.nextToken());
