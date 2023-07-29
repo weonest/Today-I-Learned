@@ -1,0 +1,20 @@
+
+n	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ıÈ½ÿÿÿÿÿ8ğ©Íš1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‹ÜŞÏşÿÿÿÿ8ñ©Íš1
+n
+java:S3008"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’¬Ûòúÿÿÿÿ8Ü©Íš1
+n
+java:S3008"LRename this field "M" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’¬Ûòúÿÿÿÿ8Ü©Íš1
+n
+java:S3008"LRename this field "G" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’¬Ûòúÿÿÿÿ8Ü©Íš1
+n
+java:S3008"LRename this field "R" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’¬Ûòúÿÿÿÿ8Ü©Íš1
+`
+java:S1659">Declare "M" and all following declarations on a separate line.(’¬Ûòúÿÿÿÿ8İ©Íš1
+[
+java:S1659">Declare "y" and all following declarations on a separate line.(®çû…8ß©Íš1
+U	java:S106M"9Replace this use of System.out or System.err by a logger.(ô¤„å8ä©Íš1
+t
+java:S3776l"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(òĞáşÿÿÿÿ8æ©Íš1
+J
+java:S1125š"'Remove the unnecessary boolean literal.(´ğÔùÿÿÿÿ8è©Íš1

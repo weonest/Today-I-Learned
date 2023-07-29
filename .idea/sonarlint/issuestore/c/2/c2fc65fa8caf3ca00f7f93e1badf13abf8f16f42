@@ -1,0 +1,15 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‡óñ¥8¢÷•1
+i
+java:S3008"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤áäÁ8“ş•1
+k
+java:S3008"NRename this field "MAX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤áäÁ8Œ×¼•1
+i
+java:S3008"LRename this field "R" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤áäÁ8“ş•1
+]
+java:S1659"@Declare "MAX" and all following declarations on a separate line.(¤áäÁ8×¼•1
+I
+java:S1197",Move the array designators [][] to the type.(°ì8ƒ“ş•1
+o
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(œû¿Ø8…“ş•1
+U	java:S106F"9Replace this use of System.out or System.err by a logger.(ô¤„å8Š“ş•1

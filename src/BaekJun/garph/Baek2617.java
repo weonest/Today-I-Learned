@@ -25,7 +25,6 @@ public class Baek2617 {
         }
     }
 
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
@@ -53,6 +52,7 @@ public class Baek2617 {
 
         System.out.println("marbles = " + marbles[4].hCnt);
         System.out.println("marbles = " + marbles[1].lCnt);
-
+        
+        // 다시 풀어야 함
     }
 }

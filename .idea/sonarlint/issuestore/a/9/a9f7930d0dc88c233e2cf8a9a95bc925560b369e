@@ -1,0 +1,12 @@
+
+L
+java:S1066A"/Merge this if statement with the enclosing one.(¯¶×€8ÎÖäŸ›1
+n	java:S101	"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÄâÑøÿÿÿÿ8ÏÖäŸ›1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‹ÜŞÏşÿÿÿÿ8ĞÖäŸ›1
+U	java:S106#"9Replace this use of System.out or System.err by a logger.(ô¤„å8Ş½æŸ›1
+t
+java:S37764"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ÈÕÂÄşÿÿÿÿ8×äŸ›1
+c
+java:S1126H"AReplace this if-then-else statement by a single return statement.(¹›ÂÇøÿÿÿÿ8×äŸ›1
+c
+java:S1126S"AReplace this if-then-else statement by a single return statement.(·é£üÿÿÿÿ8³‹€ ›1

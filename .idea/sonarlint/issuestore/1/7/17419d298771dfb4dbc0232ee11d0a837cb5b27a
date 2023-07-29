@@ -1,0 +1,15 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(‡óñ¥8º¿¶‘•1
+i
+java:S39735"GUse indentation to denote the code conditionally executed by this "if".(êÏéÇýÿÿÿÿ8º¿¶‘•1
+i
+java:S3008"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ð ¬ï8ÊÀ¶‘•1
+i
+java:S3008"LRename this field "M" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ð ¬ï8ÊÀ¶‘•1
+<
+java:S1659"Declare "M" on a separate line.(ð ¬ï8ËÀ¶‘•1
+I
+java:S1197",Move the array designators [][] to the type.(°ì8ÍÀ¶‘•1
+o
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(œû¿Ø8ÎÀ¶‘•1
+U	java:S106;"9Replace this use of System.out or System.err by a logger.(ô¤„å8ÒÀ¶‘•1

@@ -1,0 +1,11 @@
+
+u	java:S135Q"YReduce the total number of break and continue statements in this loop to use at most one.(„ÿ° 8²“²Ž–1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(×É•¿8³“²Ž–1
+n
+java:S3008
+"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ûîèõþÿÿÿÿ8Ó”²Ž–1
+n
+java:S3008"LRename this field "M" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ï¹Åüÿÿÿÿ8Õ”²Ž–1
+Z	java:S106>"9Replace this use of System.out or System.err by a logger.(–ÿÅ«þÿÿÿÿ8Þ”²Ž–1
+Z	java:S106E"9Replace this use of System.out or System.err by a logger.(Ý˜½…ùÿÿÿÿ8ß”²Ž–1
+U	java:S106H"9Replace this use of System.out or System.err by a logger.(Ù©È±8á”²Ž–1

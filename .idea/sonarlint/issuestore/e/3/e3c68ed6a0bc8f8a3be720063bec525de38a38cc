@@ -1,0 +1,13 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ô«Şøÿÿÿÿ
+S	java:S106
+"9Replace this use of System.out or System.err by a logger.(Õà¾üúÿÿÿÿ
+g
+java:S3457"Q%n should be used in place of \n to produce the platform-specific line separator.(æÚ­í
+N	java:S106"9Replace this use of System.out or System.err by a logger.(æÚ­í
+?
+java:S2140")Use "java.util.Random.nextInt()" instead.(µ¥à
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ç’¤™
+g
+java:S3457"Q%n should be used in place of \n to produce the platform-specific line separator.(æÚ­í
+N	java:S106"9Replace this use of System.out or System.err by a logger.(æÚ­í
