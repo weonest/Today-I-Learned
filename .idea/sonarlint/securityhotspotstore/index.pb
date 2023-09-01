@@ -29,16 +29,6 @@ M
 src/BaekJun/mst/Baek1774.java,7\d\7d385031d8cec61903d0d43aec719bfc85509ccf
 J
 src/BaekJun/Baek21608.java,f\a\fa57f7b371d43ea61a2bcff569ab2be27c801594
-N
-src/BaekJun/bfs/Baek14442.java,d\6\d68be344597bf58c775d5506e7ca43b30f538c60
-P
- src/BaekJun/greedy/Baek1700.java,9\1\9115b5e634b5240e340512ce43c2a4f1a9f6d1f4
-E
-src/BaekJun/Main.java,0\0\001f94c632fa62bff430ae9f3d6b42c3df82cbeb
-S
-#src/BaekJun/backtracking/_1941.java,a\9\a9f7930d0dc88c233e2cf8a9a95bc925560b369e
-S
-#src/BaekJun/backtracking/_9663.java,5\e\5e80a72b7d3db22b5e09fe536b4dce5761745a11
 V
 &src/BaekJun/binarySearch/Baek1202.java,6\2\62e26e87385bd64fe41f54a9b011a63c0bb38d40
 I
@@ -53,8 +43,6 @@ T
 $src/BaekJun/TwoPointer/Baek1806.java,d\f\dfff117638e98e4246236e2eb3f07f9c8ef354ec
 Q
 !src/BaekJun/TwoPointer/_1644.java,3\d\3df2bd8e3a3c7016598367d48ed567787b92db34
-M
-src/BaekJun/bfs/Baek9328.java,b\1\b1c1a085a16a74dc0124229470658e19d5363772
 R
 "src/BaekJun/TwoPointer/_13144.java,d\d\dd845e21df85393163e19270e709a489662acc3e
 J
@@ -69,8 +57,6 @@ O
 src/BaekJun/garph/Baek2617.java,b\5\b5153b29d25f870cacc83367014b4a24c33d9ed8
 M
 src/BaekJun/mst/Baek1647.java,b\8\b882970ffc3d749787dcc45dafe092fb12dd1557
-T
-$src/BaekJun/backtracking/_18809.java,a\a\aa4fe3a4354b68593e28c76596cb910c4f22bb1d
 K
 src/BaekJun/tree/_1240.java,9\6\96d9096f2e306b90e6ed31a7882390a59cbc7aca
 K

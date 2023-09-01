@@ -91,7 +91,6 @@ public class _1504 {
             for (Node next : graph[cur]) {
                 if (dist[next.dest] > dist[cur] + next.cost) {
                     dist[next.dest] = dist[cur] + next.cost;
-
                     pq.offer(new Node(next.dest, dist[next.dest]));
                 }
             }

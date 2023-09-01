@@ -1,17 +1,0 @@
-
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(óåœÀüÿÿÿÿ8ò¬…ß–1
-i
-java:S3008"LRename this field "T" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë©ÑÃ8¦®…ß–1
-i
-java:S3008"LRename this field "H" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë©ÑÃ8¦®…ß–1
-i
-java:S3008"LRename this field "W" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë©ÑÃ8¦®…ß–1
-[
-java:S1659">Declare "H" and all following declarations on a separate line.(Ë©ÑÃ8¦®…ß–1
-o
-java:S3776#"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(œû¿Ø8©®…ß–1
-M
-java:S1481)"+Remove this unused "answer" local variable.(šŽ²ƒûÿÿÿÿ8«®…ß–1
-o
-java:S3776N"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(§®€»8­®…ß–1
-U	java:S106}"9Replace this use of System.out or System.err by a logger.(ô¤„å8°®…ß–1

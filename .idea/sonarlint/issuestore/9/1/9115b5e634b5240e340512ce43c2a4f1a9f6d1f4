@@ -1,13 +1,0 @@
-
-v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÐèÞª8‹ØŒÍš1
-n
-java:S3008
-"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô« Ãúÿÿÿÿ8‘ØŒÍš1
-n
-java:S3008
-"LRename this field "K" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô« Ãúÿÿÿÿ8‘ØŒÍš1
-A
-java:S1659
-"Declare "K" on a separate line.(Ô« Ãúÿÿÿÿ8‘ØŒÍš1
-J
-java:S1481"-Remove this unused "multitap" local variable.(ÄùÕî8˜ØŒÍš1

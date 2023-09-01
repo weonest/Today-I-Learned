@@ -1,9 +1,0 @@
-
-Z
-java:S2184\"ECast one of the operands of this subtraction operation to a "double".(‚¡®8
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Íúâ¥üÿÿÿÿ
-g
-java:S3008"LRename this field "N" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ûîèõþÿÿÿÿ
-t
-java:S1210#"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(¨¢úýûÿÿÿÿ
-N	java:S106`"9Replace this use of System.out or System.err by a logger.(ô¤„å
