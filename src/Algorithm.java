@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class Algorithm {
 
     static int[] out;
@@ -43,11 +46,12 @@ public class Algorithm {
         }
         for (int i = start; i < arr.length; i++) {
             if (!visited[i]) {
-                visited[i] = true;
+//                visited[i] = true;
                 out[depth] = arr[i];
                 combination(arr, visited, i+1 , depth + 1, r);
-                visited[i] = false;
+//                visited[i] = false;
             }
         }
     }
+
 }
